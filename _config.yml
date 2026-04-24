@@ -1,0 +1,39 @@
+title: "AstroStat School 2026 — Rome"
+author: "AstroStat Academy"
+copyright: "2026"
+
+html:
+  extra_css:
+    - _static/custom.css
+  static_path:
+    - Template_Notebook/images
+    - Template_Notebook/data
+  
+repository:
+  url: https://github.com/AstroStat-Academy/astrostat-school-7
+  path_to_book: .
+  branch: main
+
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
+  # thebe: true
+  # binderhub_url: "https://mybinder.org"
+
+execute:
+  execute_notebooks: "off"
+
+parse:
+  myst_enable_extensions:
+    # Don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default! See here: https://jupyterbook.org/en/stable/customize/config.html
+    - html_image
+    
+    # Add the dollarmath extension to allow LaTeX-style math syntax
+    # so that $...$ (inline math) and $$...$$ (display math) work.
+    # This makes expressions like $\leftarrow$ render properly in both
+    # Jupyter Notebook and Jupyter Book without extra directives.
+    - dollarmath
+    
+    # Add the amsmath extension for more advanced LaTeX environments
+    # such as \begin{align}...\end{align} or \eqref.
+    - amsmath    

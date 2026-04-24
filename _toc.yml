@@ -1,0 +1,8 @@
+format: jb-book
+root: index
+
+options:
+  numbered: false
+
+chapters:
+  - file: Template_Notebook/Template_Notebook.ipynb
