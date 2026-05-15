@@ -5,4 +5,10 @@ options:
   numbered: false
 
 chapters:
-  - file: Template_Notebook/Template_Notebook.ipynb
+  - file: Fitting_and_Optimization/Fitting_and_Optimization.ipynb
+  - file: Bayesian/Bayesian_1.ipynb
+  - file: Bayesian/Bayesian_2.ipynb  
+  - file: MCMC/MCMC.ipynb  
+  - file: Machine_Learning/Intro_and_Clustering.ipynb  
+  
+
