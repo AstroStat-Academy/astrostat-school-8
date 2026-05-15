@@ -8,3 +8,8 @@ Use the sidebar to navigate topics. Each notebook can be opened and run interact
 ## Topics
 
 - **Template** — remove before flight
+- **Fitting & Optimization** — you think you fit ??
+- **Bayesian** — Getting your hands dirty 
+- **MCMC** — MC Hammer ...
+- **Machine Learning** — Well lets talk about business.
+
