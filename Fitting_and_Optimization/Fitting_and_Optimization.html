@@ -1,0 +1,1419 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Basics of Optimization &#8212; AstroStat School 2026 — New York</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Fitting_and_Optimization/Fitting_and_Optimization';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Bayesian Statistics" href="../Bayesian/Bayesian_1.html" />
+    <link rel="prev" title="AstroStat School 2026 — New York" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — New York</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — New York
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics of Optimization</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Bayesian Statistics — Applied</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">1. Introduction</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">ML Intro and Clustering</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7\8/blob/main/./Fitting_and_Optimization/Fitting_and_Optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Fitting_and_Optimization/Fitting_and_Optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basics of Optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basics of Optimization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-parametric-fitting">What is [parametric] fitting</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-line-via-ordinary-least-squares-ols">Fitting a line via Ordinary Least Squares (OLS)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">Problem definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-python">In python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-python-an-easier-library">In python - an easier library</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#in-class-exercise-30-min">In-class Exercise [30 min]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-least-squares-levenberg-marquardt-algorithm">Non-linear least squares: Levenberg-Marquardt algorithm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brute-force-approach-spoiler-doesn-t-work">Brute-force approach (spoiler: doesn’t work!)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-approach-now-we-are-talking">Iterative approach (now we are talking!)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enough-with-the-crayons-now-math">Enough with the crayons - now, math!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actual-levenberg-marquardt-algorithm">Actual Levenberg &amp; Marquardt algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reads">Further reads</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-2-fitting">Chi-square (χ<span class="math notranslate nohighlight">\(^{2}\)</span>) fitting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Further reads</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-gradient-descent-teaser">Stochastic Gradient Descent - teaser</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-is-everywhere">Optimization is everywhere!</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            Summer School for AstroStatistics in Sharjah 2025<br>
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="basics-of-optimization">
+<h1>Basics of Optimization<a class="headerlink" href="#basics-of-optimization" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">style</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="c1"># Set up a fancy plot style (you can comment it out without consequences)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../src&#39;</span><span class="p">);</span> <span class="kn">import</span><span class="w"> </span><span class="nn">plot_style</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-parametric-fitting">
+<h1>What is [parametric] fitting<a class="headerlink" href="#what-is-parametric-fitting" title="Link to this heading">#</a></h1>
+<p>Easiest to start with a <strong>linear</strong> example.</p>
+<p>Say we have some <em>observed</em> data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>… and we want a model that represents the true beahvior of the data.</p>
+<blockquote>
+<div><p>We may want to use it for:</p>
+<ul class="simple">
+<li><p><strong>predicting</strong> new data</p></li>
+<li><p><strong>explain</strong> the phenomenon that causes our observations</p></li>
+</ul>
+</div></blockquote>
+<p>Let’s assume a one-dimensional <strong>linear model</strong>, that is, a model of the type:</p>
+<div class="math notranslate nohighlight">
+\[ y = \alpha{}x + \beta \]</div>
+<p>where we call <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> the model <strong>parameters</strong>.</p>
+<p>By changing the parameters we obtain <strong>different models</strong>, e.g.:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">funct</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">alpha</span><span class="o">*</span><span class="n">xx</span> <span class="o">+</span> <span class="n">beta</span>
+
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="sd">&#39;&#39;&#39;Notice that `xx` is not the same as `X` (the data), but just </span>
+<span class="sd">an array of equally spaced values that we use for plotting purposes.&#39;&#39;&#39;</span>
+
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>
+<span class="n">betas</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">)):</span>
+    
+    <span class="n">y_model_i</span> <span class="o">=</span> <span class="n">funct</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">y_model_i</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;model </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;C</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>It is convenient to think that each <strong>parameter set</strong> gives rise to a <strong>different model</strong><br>
+(<span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>convenient for when we will talk about “model selection”</em>)</p>
+</div></blockquote>
+<p>So the problem of picking the <strong>best-fitting model</strong> becomes <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>How do I pick the best <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>?</em></p>
+<p><strong>Q:</strong> First of all: what “<strong>best</strong>” means? (<em>in-class discussion</em>)</p>
+<div class="alert alert-danger alertdanger" role="alert" style="border-radius: 8px; padding: 10px;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> We need to define a <b>metric of fitness</b>!</p>
+</details>
+</div>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>As a fitness metric, we could use the <strong>error</strong> that each model makes.  For each observed datum, the error is:</p>
+<div class="math notranslate nohighlight">
+\[ err_{i} = y_i - \hat{y}_i\]</div>
+<p>where <span class="math notranslate nohighlight">\( \hat{y}_i\)</span> is the model prediction for the corresponding <span class="math notranslate nohighlight">\(x_{i}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+ 
+<span class="n">yhat_1</span> <span class="o">=</span> <span class="n">funct</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">alphas</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">betas</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># model predictions (dots)</span>
+<span class="n">y_model_1</span> <span class="o">=</span> <span class="n">funct</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">alphas</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">betas</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># just for plotting the model (line)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">y_model_1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">)</span>
+<span class="n">errs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat_1</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;err&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">errs</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">yhat_1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat</span><span class="si">{y}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> So what about picking the <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> that minimize the errors?</p>
+<p>It’s easier if we minimize a <strong>single number</strong>, so, we can consider the “sum of errors”:</p>
+<div class="math notranslate nohighlight">
+\[ \sum_i err_i = \sum_i (y_i - \hat{y}_i) \]</div>
+<p><strong>Q:</strong> But minimizing this has a problem. Can you guess? (<em>in-class discussion</em>)</p>
+<div class="alert alert-danger alertdanger" role="alert" style="border-radius: 8px; padding: 10px;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> Sorry, you should have paid attention in class!</p>
+</details>
+</div>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>We consider the <strong>sum of squares</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ S = \sum_i err_i^2 = \sum_i (y_i - \hat{y}_i)^2 \]</div>
+<p>and hence the <strong>Least Squares Method</strong>:</p>
+<blockquote>
+<div><p>The best-fitting parameters (=model) are those that <u>minimize the sum of squares of the errors</u></p>
+</div></blockquote>
+<p><u>IMPORTANT:</u><br></p>
+<blockquote>
+<div><p>The Least Squares method is only <u>one</u> possible optimization method.</p>
+<p>As we will see over and over again during this school, there are other <strong>definitions</strong> of “best fitting model” (e.g. <em>the one that minimizes the absolute error</em>), as well as countless <strong>algorithms</strong> to find such optimum.</p>
+</div></blockquote>
+<p>Yet, LS is a very good example to start with, to get the general <strong>intuition</strong> behind optimization.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="fitting-a-line-via-ordinary-least-squares-ols">
+<h1>Fitting a line via Ordinary Least Squares (OLS)<a class="headerlink" href="#fitting-a-line-via-ordinary-least-squares-ols" title="Link to this heading">#</a></h1>
+<p>The linear case offers the <em>simplest</em> application of LS fitting, which goes under the name of <strong>Ordinary Least Squares (OLS)</strong>.</p>
+<p>Simple <span class="math notranslate nohighlight">\(\rightarrow\)</span> We can solve this <u>analytically</u> (<em>no approximations, no iterations, computationally fast</em>).</p>
+<section id="problem-definition">
+<h2>Problem definition<a class="headerlink" href="#problem-definition" title="Link to this heading">#</a></h2>
+<p><em>We follow <a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">this wikipedia article on OLS</a> for the formalism/nomenclature.</em></p>
+<p>We first need to generalize to <span class="math notranslate nohighlight">\(p\)</span> dimensions  <span class="math notranslate nohighlight">\(\rightarrow\)</span> now, each <span class="math notranslate nohighlight">\(X_i\)</span> for sample <span class="math notranslate nohighlight">\(i\)</span> is not a single feature (as before), but an <strong>array of features</strong>:</p>
+<div class="math notranslate nohighlight">
+\[X_i = [x_0, x_1, x_2, ..., x_p]~~for~sample~i\]</div>
+<p>So, if we have <strong><span class="math notranslate nohighlight">\(n\)</span> samples</strong>, each having <strong><span class="math notranslate nohighlight">\(p\)</span> dimensions</strong>, the data matrix is:</p>
+<table><tr>
+    <td width=220>
+        <img src="images/Matrix_X.png">
+    </td>
+</tr></table>
+<p><em>NOTE: Samples are along rows, in this notation.</em></p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>However, the <strong>target variable</strong> is still one-dimensional:</p>
+<table><tr>
+    <td width=80>
+        <img src="images/Matrix_y.png">
+    </td>
+</tr></table>   
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>Now, for the <strong>model</strong> <span class="math notranslate nohighlight">\(-\)</span> In the 1D cases we said it was:</p>
+<div class="math notranslate nohighlight">
+\[ y = \alpha{}x + \beta\]</div>
+<p>Generalizing to <span class="math notranslate nohighlight">\(p\)</span> dimensions, one could say that the <strong>multi-dimensional model</strong> should be of the form:</p>
+<div class="math notranslate nohighlight">
+\[ y = \beta_1{}x_{1} + \beta_2{}x_{2} + ... + \beta_p{}x_{p} + const\]</div>
+<p>… where “<em>const</em>” plays the role of <span class="math notranslate nohighlight">\(\beta\)</span> in the 1D case, and instead of using <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, etc., we just use <span class="math notranslate nohighlight">\(\beta_1\)</span>, <span class="math notranslate nohighlight">\(\beta_2\)</span>, <span class="math notranslate nohighlight">\(\beta_3\)</span>, not to run out of Greek letters!</p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>We can forget about the const with a small trick, without losing generalization (<em>again, see <a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">the wikipedia OLS article</a></em>) <span class="math notranslate nohighlight">\(-\)</span> so our <strong>generalized multi-dimensional linear model</strong> becomes:</p>
+<div class="math notranslate nohighlight">
+\[ y = \beta_1{}x_{1} + \beta_2{}x_{2} + ... + \beta_p{}x_{p} \]</div>
+<p>But, to be formally precise, we should add the index <span class="math notranslate nohighlight">\(i\)</span>, because this <u>must hold true for <em>every</em> data point <span class="math notranslate nohighlight">\(i\)</span></u>:</p>
+<div class="math notranslate nohighlight">
+\[ y_i = \beta_1{}x_{i, 1} + \beta_2{}x_{i, 2} + ... + \beta_p{}x_{i, p} \]</div>
+<p>or, in <em>vector</em> notation:</p>
+<div class="math notranslate nohighlight">
+\[ y_i = \pmb{x_{i}}^T \pmb{\beta}\]</div>
+<p>for each point <span class="math notranslate nohighlight">\(i\)</span>.  In <em>matrix notation</em> we can represent the equations for all points in one go:</p>
+<div class="math notranslate nohighlight">
+\[ \pmb{y} = \pmb{X} \pmb{\beta}\]</div>
+<table><tr>
+    <td width=400>
+        <img src="images/Matrices.png">
+    </td>
+</tr></table>  
+</section>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Link to this heading">#</a></h2>
+<p><em>See <a class="reference external" href="https://en.wikipedia.org/wiki/Least_squares">this wikipedia article on Least squares</a> for the derivation.</em></p>
+<p>The solution is obtained by:</p>
+<ol class="arabic simple">
+<li><p><strong>Writing the squares in a convenient form</strong></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ S(\pmb{\beta}) = || \pmb{y} - \pmb{X} \pmb{\beta} ||^2\]</div>
+<div class="math notranslate nohighlight">
+\[ = (\pmb{y} - \pmb{X\beta})^T(\pmb{y} - \pmb{X\beta})\]</div>
+<div class="math notranslate nohighlight">
+\[ = \pmb{y}^T\pmb{y} - \pmb{y}^T\pmb{X}\pmb{\beta} - \pmb{\beta}^T\pmb{X}^T\pmb{y} + \pmb{\beta}^T\pmb{X}^T\pmb{X}\pmb{\beta} \]</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Finding the minimizer by searching where the derivative of <span class="math notranslate nohighlight">\(S(\pmb{\beta})\)</span> equals 0</strong></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ 0 = \frac{\partial S(\pmb{\beta})}{\partial \pmb{\beta}} \]</div>
+<blockquote>
+<div><p><u>IMPORTANT</u>: We want to minimize <span class="math notranslate nohighlight">\(S(\pmb{\beta})\)</span> with respect to <span class="math notranslate nohighlight">\(\pmb{\beta}\)</span>, <u>not</u> <span class="math notranslate nohighlight">\(\pmb{X}\)</span> !<br>
+        <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>i.e., we are looking for the best parameter set <span class="math notranslate nohighlight">\(\hat{\pmb{\beta}}\)</span> that minimizes the squared errors:</em></p>
+<p>        <span class="math notranslate nohighlight">\(\pmb{\hat{\beta}} = \operatorname{argmin_\beta} S(\pmb{\beta})\)</span></p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[ 0 = \frac{\partial S(\pmb{\beta})}{\partial \pmb{\beta}} \]</div>
+<div class="math notranslate nohighlight">
+\[
+= \frac{\partial 
+    ( \pmb{y}^T\pmb{y} - \pmb{y}^T\pmb{X}\pmb{\beta} - \pmb{\beta}^T\pmb{X}^T\pmb{y}
+    +\pmb{\beta}^T\pmb{X}^T\pmb{X}\pmb{\beta} )
+   }{
+    \partial \pmb{\beta}
+   } 
+\]</div>
+<div class="math notranslate nohighlight">
+\[ = -2\pmb{X}^T\pmb{y} + 2\pmb{X}^T\pmb{X}\pmb{\beta} \]</div>
+<p>simplifying, and moving terms around it follows:</p>
+<div class="math notranslate nohighlight">
+\[ \pmb{X}^T\pmb{y} =  \pmb{X}^T\pmb{X}\pmb{\beta} \]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-e5d5c786-6435-4819-9ead-54218fb62a3b">
+<span class="eqno">(1)<a class="headerlink" href="#equation-e5d5c786-6435-4819-9ead-54218fb62a3b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \pmb{\hat{\beta}} = (\pmb{X}^T\pmb{X})^{-1}\pmb{X}^T\pmb{y} \tag{Eq. 1}
+\end{equation}\]</div>
+<blockquote>
+<div><p><u>Extremely simple</u></p>
+<p><u>But is it computationally fast?</u><br>  Inverting a matrix (in our case, (<span class="math notranslate nohighlight">\(\pmb{X}^T\pmb{X})^{-1}\)</span>) is a “heavy lifting” job for a computer.<br>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>complexity: <span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span></em></p>
+</div></blockquote>
+</section>
+<section id="in-python">
+<h2>In python<a class="headerlink" href="#in-python" title="Link to this heading">#</a></h2>
+<p>We will use <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html"><code class="docutils literal notranslate"><span class="pre">numpy.linalg.lstsq</span></code></a> to fit:</p>
+<div class="math notranslate nohighlight">
+\[ y = \beta_2{}x + \beta_1 \]</div>
+<p>to the data seen above (notice that now we call every parameter as “<span class="math notranslate nohighlight">\(\beta_{&lt;number&gt;}\)</span>”, as for the generic multi-dimensional case).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Same data as above:</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">])</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lstsq</span>
+
+<span class="n">X_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))])</span><span class="o">.</span><span class="n">T</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">What is this line doing?! Adding a row of `1`s to our data?! Why?</span>
+
+<span class="sd">Remember, above, when we said that we can &quot;hide&quot; the constant in:</span>
+<span class="sd">    y = beta*X + const</span>
+<span class="sd">using a trick?</span>
+
+<span class="sd">The trick it is to create a &quot;fake&quot;, additional feature in X, and fill it</span>
+<span class="sd">with ones.  This will play the role of the constant.</span>
+
+<span class="sd">See the links above, as well as the `np.linalg.lstsq` documentation, here:</span>
+<span class="sd">    https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">;</span>
+
+<span class="n">beta_2_hat</span><span class="p">,</span> <span class="n">beta_1_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">X_prime</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># best-fitting parameters</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">beta_2_hat</span><span class="o">*</span><span class="n">xx</span> <span class="o">+</span> <span class="n">beta_1_hat</span><span class="p">,</span> <span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Best-fitting model&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">.05</span><span class="p">,</span> <span class="mf">.99</span><span class="p">,</span> <span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">hat{</span><span class="se">\\</span><span class="s1">beta}_2 = </span><span class="si">%.2f</span><span class="s1">$&#39;</span> <span class="o">%</span> <span class="n">beta_2_hat</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">.05</span><span class="p">,</span> <span class="mf">.89</span><span class="p">,</span> <span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">hat{</span><span class="se">\\</span><span class="s1">beta}_1 = </span><span class="si">%.2f</span><span class="s1">$&#39;</span> <span class="o">%</span> <span class="n">beta_1_hat</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="in-python-an-easier-library">
+<h2>In python - an easier library<a class="headerlink" href="#in-python-an-easier-library" title="Link to this heading">#</a></h2>
+<p>Ok, <code class="docutils literal notranslate"><span class="pre">numpy.linalg.lstsq</span></code> is very educational because it solves the OLS problem <strong>algebraically</strong>, just like in Equation 1.<br>
+But <span class="math notranslate nohighlight">\(-\)</span> as you have seen <span class="math notranslate nohighlight">\(-\)</span> it has a clumsy usage.</p>
+<p>For practical purposes, we will now on use the much more <strong>intuitive</strong> and <strong>flexible</strong> <a class="reference external" href="https://lmfit.github.io/lmfit-py/"><code class="docutils literal notranslate"><span class="pre">lmfit</span></code></a>.</p>
+<blockquote>
+<div><p><em>NOTE: Internally, it uses by default a different algorithm to solve the least-squares problem (see later: “Levenberg-Marquardt”), but we pretend not, for now.</em></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lmfit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">model_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">beta_1</span><span class="p">,</span> <span class="n">beta_2</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">beta_2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">beta_1</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="c1"># Create an lmfit `Model` object:</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">model_func</span><span class="p">)</span>
+
+<span class="c1"># Invoking the `fit()` method, which returns the object `result`:</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">beta_1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">beta_2</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Notice that here we are providing some initial guess for `beta_1` and `beta_2`,</span>
+<span class="sd">this is only because this library is using the Levenberg-Marquardt algorithm.</span>
+
+<span class="sd">In reality OLS doesn&#39;t need initial guesses when using the algebraic solution,</span>
+<span class="sd">as demonstrated above by using `np.linalg.lstsq`, which properly solves OLS.</span>
+
+<span class="sd">We will see later why Levenberg-Marquardt requires initial guesses.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># Retrieving best-fit parameters:</span>
+<span class="n">beta_1_hat</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;beta_1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="n">beta_2_hat</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;beta_2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="sd">&#39;&#39;&#39;Notice that `xx` is not the same as `X` (the data), but just </span>
+<span class="sd">an array of equally spaced values that we use for plotting purposes.&#39;&#39;&#39;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">beta_2_hat</span><span class="o">*</span><span class="n">xx</span> <span class="o">+</span> <span class="n">beta_1_hat</span><span class="p">,</span> <span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Best-fitting model&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">.05</span><span class="p">,</span> <span class="mf">.99</span><span class="p">,</span> <span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">hat{</span><span class="se">\\</span><span class="s1">beta}_2 = </span><span class="si">%.2f</span><span class="s1">$&#39;</span> <span class="o">%</span> <span class="n">beta_2_hat</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">.05</span><span class="p">,</span> <span class="mf">.89</span><span class="p">,</span> <span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">hat{</span><span class="se">\\</span><span class="s1">beta}_1 = </span><span class="si">%.2f</span><span class="s1">$&#39;</span> <span class="o">%</span> <span class="n">beta_1_hat</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="in-class-exercise-30-min">
+<h1>In-class Exercise [30 min]<a class="headerlink" href="#in-class-exercise-30-min" title="Link to this heading">#</a></h1>
+<p><strong>Objective:</strong> Evaluate the best-fit model to some data. You will have to assume a model, and then run the Least-Squares minimization on the provided data.</p>
+<p><u>The final goal is to observe what happens when you apply the model to new, “<em>test</em>” data.</u>
+<br></p>
+<p><strong>Dataset:</strong> The following one.</p>
+<p><strong>Task:</strong>  In particular, you will have to:</p>
+<ol class="arabic simple">
+<li><p>Look at the data and assume a model</p></li>
+<li><p>Use only the “<em>train</em>” data to perform the LS minimization to find the best model</p></li>
+<li><p>Using the best model, calculate and plot the model predictions on the “<em>train</em>” data</p></li>
+<li><p>Calculate and plot the model predictions on the “<em>test</em>” data</p></li>
+<li><p>Calculate the squares of errors for the “<em>train</em>” (<span class="math notranslate nohighlight">\(S_{train}\)</span>) and “<em>test</em>” (<span class="math notranslate nohighlight">\(S_{test}\)</span>) data</p></li>
+<li><p>Now compare the two squares of errors <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>What do you notice?</em></p></li>
+</ol>
+<p><strong>Hints:</strong></p>
+<ul class="simple">
+<li><p><em>For task 5</em> <span class="math notranslate nohighlight">\(-\)</span> To get the squares of errors you can simply calculate:
+$<span class="math notranslate nohighlight">\( S_{train} = \sum_i (y_i - \hat{y}_i)^2 ~~~~~ \forall i \in train\)</span>$</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ S_{test} = \sum_i (y_i - \hat{y}_i)^2 ~~~~~ \forall i \in test\]</div>
+<p>   Notice that <span class="math notranslate nohighlight">\(-\)</span> once the model has been fit <span class="math notranslate nohighlight">\(-\)</span> <span class="math notranslate nohighlight">\(S_{train}\)</span> is effectively <em>the</em> minimized Least Squares.<br>
+   But what about <span class="math notranslate nohighlight">\( S_{test} \)</span>?</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loading and plotting data:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tarfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;data/data_inclass_ex1.tar.gz&quot;</span><span class="p">,</span> <span class="s2">&quot;r:gz&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_and_load</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">tar</span><span class="o">.</span><span class="n">getmembers</span><span class="p">():</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">tar</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;X_train.npy&#39;</span><span class="p">:</span> <span class="n">X_train</span> <span class="o">=</span> <span class="n">convert_and_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;y_train.npy&#39;</span><span class="p">:</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">convert_and_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;X_test.npy&#39;</span><span class="p">:</span>  <span class="n">X_test</span>  <span class="o">=</span> <span class="n">convert_and_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;y_test.npy&#39;</span><span class="p">:</span>  <span class="n">y_test</span>  <span class="o">=</span> <span class="n">convert_and_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span>  <span class="n">y_test</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>  <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;train/test split&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lmfit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+
+<span class="c1"># 1. Assuming a sinusoidal model</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">model_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">beta_1</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">beta_1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="c1"># 2. Using only the &quot;_train_&quot; data to perform the LS minimization</span>
+
+<span class="c1"># Create an lmfit `Model` object:</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">model_func</span><span class="p">)</span>
+
+<span class="c1"># Invoking the `fit()` method, which returns the object `result`:</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span> <span class="n">beta_1</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Retrieving best-fit parameters:</span>
+<span class="n">beta_1_hat</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;beta_1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+<span class="c1"># 3. Calculating and plotting the model predictions on the &quot;_train_&quot; data</span>
+<span class="c1"># 4. Calculating and plotting the model predictions on the &quot;_test_&quot; data</span>
+<span class="c1"># Predictions of the model for train/test:</span>
+<span class="n">yhat_train</span> <span class="o">=</span> <span class="n">model_func</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">beta_1_hat</span><span class="p">)</span>
+<span class="n">yhat_test</span>  <span class="o">=</span> <span class="n">model_func</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span>  <span class="n">beta_1_hat</span><span class="p">)</span>
+
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="sd">&#39;&#39;&#39;Notice that `xx` is not the same as `X` (the data), but just </span>
+<span class="sd">an array of equally spaced values that we use for plotting purposes.&#39;&#39;&#39;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="c1"># Data:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span>  <span class="n">y_test</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>  <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="c1"># Model:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">model_func</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">beta_1_hat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Train predictions:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">yhat_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat</span><span class="si">{y}</span><span class="s1">_</span><span class="si">{train}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="c1"># Test predictions:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span>  <span class="n">yhat_test</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat</span><span class="si">{y}</span><span class="s1">_</span><span class="si">{test}</span><span class="s1">$&#39;</span><span class="p">,</span>  <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Best-fitting model&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5. Calculating squares of errors for the &quot;_train_&quot; and &quot;_test_&quot;:</span>
+<span class="n">S_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">yhat_train</span> <span class="o">-</span> <span class="n">y_train</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+<span class="n">S_test</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">yhat_test</span> <span class="o">-</span> <span class="n">y_test</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+
+<span class="c1"># 6. Now comparing the two squares:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;S_train: </span><span class="si">%.2f</span><span class="s2"> | S_test: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">S_train</span><span class="p">,</span> <span class="n">S_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><u><span class="math notranslate nohighlight">\(S_{test}\)</span> is way larger than <span class="math notranslate nohighlight">\(S_{train}\)</span></u> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>overfitting</strong></p>
+<p>This is to be expected because the model has been trained on <span class="math notranslate nohighlight">\(X_{train}\)</span>, and, as you can see, <span class="math notranslate nohighlight">\(X_{test}\)</span> shows larger variance.</p>
+<p><strong>Q:</strong> What could we do to obtain a more <strong>balanced model</strong> (i.e., a model with similar <em>performance</em> on train and test data)? (<em>in-class discussion</em>)</p>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+</b>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> <b>Shuffle</b> the data!</p>
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;Merging train and test data, first.&#39;&#39;&#39;</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Now performing a random split of the merged data.</span>
+<span class="sd">Re-running this block will generate a new, randomized split.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">idxs_train_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))),</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+<span class="c1"># ^here we pick at random some train indexes from the merged `X` </span>
+<span class="n">idxs_test_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">idxs_train_</span><span class="p">))</span>
+<span class="c1"># ^here we pick the complementary indexes</span>
+
+<span class="n">X_train_</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">idxs_train_</span><span class="p">]</span>
+<span class="n">y_train_</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idxs_train_</span><span class="p">]</span>
+<span class="n">X_test_</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">idxs_test_</span><span class="p">]</span>
+<span class="n">y_test_</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idxs_test_</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train_</span><span class="p">,</span> <span class="n">y_train_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test_</span><span class="p">,</span>  <span class="n">y_test_</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>  <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Randomized train/test split&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;Re-running the same fit as above on the new, randomized split.&#39;&#39;&#39;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lmfit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">model_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">beta_1</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">beta_1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">model_func</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span> <span class="n">beta_1</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">beta_1_hat</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;beta_1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+<span class="n">yhat_train_</span> <span class="o">=</span> <span class="n">model_func</span><span class="p">(</span><span class="n">X_train_</span><span class="p">,</span> <span class="n">beta_1_hat</span><span class="p">)</span>
+<span class="n">yhat_test_</span>  <span class="o">=</span> <span class="n">model_func</span><span class="p">(</span><span class="n">X_test_</span><span class="p">,</span>  <span class="n">beta_1_hat</span><span class="p">)</span>
+
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train_</span><span class="p">,</span> <span class="n">y_train_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test_</span><span class="p">,</span>  <span class="n">y_test_</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>  <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">model_func</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">beta_1_hat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Best-fitting model&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">S_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">yhat_train_</span> <span class="o">-</span> <span class="n">y_train_</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+<span class="n">S_test</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">yhat_test_</span> <span class="o">-</span> <span class="n">y_test_</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;S_train: </span><span class="si">%.2f</span><span class="s2"> | S_test: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">S_train</span><span class="p">,</span> <span class="n">S_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div></section>
+<section class="tex2jax_ignore mathjax_ignore" id="non-linear-least-squares-levenberg-marquardt-algorithm">
+<h1>Non-linear least squares: Levenberg-Marquardt algorithm<a class="headerlink" href="#non-linear-least-squares-levenberg-marquardt-algorithm" title="Link to this heading">#</a></h1>
+<p>We saw <strong>linear</strong> problems, i.e. when the model is <strong>linear in the parameters</strong>, e.g.:</p>
+<div class="math notranslate nohighlight">
+\[ y = \beta_2 x + \beta_1 ~~~~~or~~~~~ y = \beta_1 sin(x) \]</div>
+<p>What about the <strong>non-linear</strong> problems, i.e. when the model is <strong><u>not</u> linear in the parameters</strong>, e.g.:</p>
+<div class="math notranslate nohighlight">
+\[ y = \beta_1e^{\beta_2 x} ~~~~~or~~~~~ y = sin(\beta_1 x) ~~~~?\]</div>
+<p>In general, LS not solvable algebraically <span class="math notranslate nohighlight">\(\rightarrow\)</span> Need to <u>converge to the solution</u>!</p>
+<section id="brute-force-approach-spoiler-doesn-t-work">
+<h2>Brute-force approach (spoiler: doesn’t work!)<a class="headerlink" href="#brute-force-approach-spoiler-doesn-t-work" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><u>Objective:</u> The taks is <span class="math notranslate nohighlight">\(-\)</span> as usual <span class="math notranslate nohighlight">\(-\)</span> to find the parameter set <span class="math notranslate nohighlight">\(\hat{\pmb{\beta}}\)</span> that <strong>minimizes the sum of squares</strong> <span class="math notranslate nohighlight">\(S(\pmb{\beta})\)</span>.</p>
+</div></blockquote>
+<p>So, let’s say that we have a model of the type:</p>
+<div class="math notranslate nohighlight">
+\[ y = \beta_1e^{\beta_2 x} \]</div>
+<p>and we want to find <span class="math notranslate nohighlight">\(\hat{\pmb{\beta}} = (\hat{\beta_1}, \hat{\beta_2})\)</span> that minimizes <span class="math notranslate nohighlight">\(S(\beta_1, \beta_2)\)</span>.</p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>Let’s <strong>assume</strong> we could potentially explore <em>all possible</em> parameter combinations.</p>
+<p>For each given <span class="math notranslate nohighlight">\((\bar{\beta}_1, \bar{\beta_2})\)</span> set, we:</p>
+<ul class="simple">
+<li><p>Create a the corresponding model: <span class="math notranslate nohighlight">\(\bar{y}_{pred} = \bar{\beta}_1e^{\bar{\beta}_2 x} \)</span></p></li>
+<li><p>Calculate <span class="math notranslate nohighlight">\(S(\bar{\beta}_1, \bar{\beta}_2) = \sum_i^{n}(\bar{y}_{i, pred} - y_{i, obs})^2\)</span></p></li>
+</ul>
+<p>… and repeat <em>ad infinitum</em>.</p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> Then, we could hypothetically map the <em>whole</em> <span class="math notranslate nohighlight">\(S(\beta_1, \beta_2)\)</span> space:</p>
+<table><tr>
+    <td width=600>
+        <img src="images/S.png">
+    </td>
+</tr></table>
+<blockquote>
+<div><p>Except that this <u>will take forever</u>!</p>
+</div></blockquote>
+</section>
+<section id="iterative-approach-now-we-are-talking">
+<h2>Iterative approach (now we are talking!)<a class="headerlink" href="#iterative-approach-now-we-are-talking" title="Link to this heading">#</a></h2>
+<p>Instead, we may want to <strong>converge</strong> to the best solution <span class="math notranslate nohighlight">\(\hat{\pmb{\beta}} = (\hat{\beta_1}, \hat{\beta_2})\)</span>.<br>
+(<em>possibly in a fast way</em>)</p>
+<blockquote>
+<div><p>We will accept a compromise: <strong>approximate solution</strong>.</p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>We start from a <strong>blank state</strong>:</p></li>
+</ol>
+<table><tr>
+    <td width=600>
+        <img src="images/S_blank.png">
+    </td>
+</tr></table>
+<ol class="arabic simple" start="2">
+<li><p>Or, better, from an <strong>initial guess</strong> <span class="math notranslate nohighlight">\((\beta^A_1, \beta^A_2)\)</span>:<br>
+(<em>We look at the function, we had an enlightment, we used cheat codes, etc.</em>)</p></li>
+</ol>
+<table><tr>
+    <td width=600>
+        <img src="images/LM_1st_guess.png">
+    </td>
+</tr></table>
+<p><em>NOTE: Here we conveniently show the neighborhood around the point we pick.</em></p>
+<p><strong>Q:</strong> Where to take the <u>next guess</u>?</p>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+</b>
+<p>What about looking at the <b>gradient</b> (i.e., <b>derivative</b>) around that point <span class="math notranslate nohighlight">\(\rightarrow\)</span> it points towards where the <span class="math notranslate nohighlight">\(S(\beta_1, \beta_2)\)</span> is decreasing.</p>
+<table><tr>
+    <td width=600>
+        <img src="images/LM_1st_gradient.png">
+    </td>
+</tr></table>
+<p>Let’s follow the white rabbit and see where it leads us …</p>
+</details>
+</div><ol class="arabic simple" start="3">
+<li><p>We take the <strong>next guess</strong>  <span class="math notranslate nohighlight">\((\beta^B_1, \beta^B_2)\)</span> <em>somewhere along the gradient</em>:</p></li>
+</ol>
+<table><tr>
+    <td width=600>
+        <img src="images/LM_2nd_guess.png">
+    </td>
+</tr></table>
+<blockquote>
+<div><p>Not bad! It lead us to a lower <span class="math notranslate nohighlight">\(S(\beta_1, \beta_2)\)</span>.  Let’s try again …</p>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>We take <strong>another guess</strong> <em>somewhere along the gradient</em>:</p></li>
+</ol>
+<table><tr>
+    <td width=600>
+        <img src="images/LM_3rd_guess.png">
+    </td>
+</tr></table>
+<ol class="arabic simple" start="5">
+<li><p>And again, and again .. <strong>until we are happy</strong> (<em>define happy</em>)</p></li>
+</ol>
+<table><tr>
+    <td width=600>
+        <img src="images/LM_4th_guess.png">
+    </td>
+</tr></table>
+</section>
+<section id="enough-with-the-crayons-now-math">
+<h2>Enough with the crayons - now, math!<a class="headerlink" href="#enough-with-the-crayons-now-math" title="Link to this heading">#</a></h2>
+<p><em>NOTE: The theory in this section is adopted from this <a class="reference external" href="https://en.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm">wikipedia article on Levenberg-Marquardt algorithm</a></em></p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>Let’s call: <span class="math notranslate nohighlight">\(\hat{y}_i := f(x_i, \pmb{\beta})\)</span> <span class="math notranslate nohighlight">\(\leftarrow\)</span> model value for <span class="math notranslate nohighlight">\(x_i\)</span></p>
+<ul class="simple">
+<li><p>The initial guess for the best-fit parameters is <span class="math notranslate nohighlight">\(\pmb{\bar{\beta}}\)</span>.</p></li>
+<li><p>The next guess is: <span class="math notranslate nohighlight">\(\pmb{\bar{\beta}}^{\prime} \leftarrow \pmb{\bar{\beta}} + \pmb{\delta}\)</span>, where <span class="math notranslate nohighlight">\(\pmb{\delta}\)</span> is the small amount we move by.</p></li>
+</ul>
+<p><u><strong>Objective:</strong></u> Update <span class="math notranslate nohighlight">\(\pmb{\bar{\beta}}\)</span> until we minimized <span class="math notranslate nohighlight">\(S(\pmb{\beta})\)</span></p>
+<p>We can use the Taylor expansion to approximate <span class="math notranslate nohighlight">\(f(x_i, \pmb{\bar{\beta}}^{\prime})\)</span> around <span class="math notranslate nohighlight">\(\pmb{\bar{\beta}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ f(x_i, \pmb{\bar{\beta}} + \pmb{\delta}) \approx f(x_i, \pmb{\bar{\beta}}) + {\partial f(x_i, \pmb{\beta}) \over \partial\pmb{\beta}} \pmb{\delta} \]</div>
+<p><u>IMPORTANT:</u> Notice that <strong>the derivative is on the parameters</strong> (<span class="math notranslate nohighlight">\(\pmb{\beta}\)</span>), <u>not</u> the data (<span class="math notranslate nohighlight">\(x_i\)</span>) ! <span class="math notranslate nohighlight">\(\rightarrow\)</span> We want to explore the <em>neighborhood</em> of <span class="math notranslate nohighlight">\(\pmb{\bar{\beta}}\)</span> !</p>
+<p>We can define <span class="math notranslate nohighlight">\(\pmb{J_i} := {\partial f(x_i, \pmb{\beta}) \over \partial\pmb{\beta}} \)</span>, so:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+ f(x_i, \pmb{\bar{\beta}} + \pmb{\delta}) \approx f(x_i, \pmb{\bar{\beta}}) + \pmb{J_i}\pmb{\delta}  \tag{Eq. 2}
+\end{equation}
+\]</div>
+<p><u><strong>Algorithm:</strong></u></p>
+<p>We now need to define how much to move, to find the next guess <span class="math notranslate nohighlight">\(\rightarrow\)</span> <span class="math notranslate nohighlight">\(\pmb{\delta} = ?\)</span></p>
+<p>We will find it by solving the usual problem <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>minimize the sum of squares</strong>.</p>
+<p>If the next guess <span class="math notranslate nohighlight">\(\pmb{\bar{\beta}} + \pmb{\delta}\)</span> corresponds to a true minimum, then <span class="math notranslate nohighlight">\(S(\pmb{\bar{\beta}} + \pmb{\delta})\)</span> must have derivative = 0 (w/r to vector <span class="math notranslate nohighlight">\(\pmb{\delta}\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[ {\partial S(\pmb{\bar{\beta}} + \pmb{\delta}) \over \partial\pmb{\delta}} = 0 \]</div>
+<blockquote>
+<div><p><em>Meaning: moving away from <span class="math notranslate nohighlight">\(\pmb{\bar{\beta}} + \pmb{\delta}\)</span> causes a worst result.</em></p>
+</div></blockquote>
+<p>Let’s solve it, starting from the approximation of <em>Equation 2</em>:</p>
+<p>$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f75063e0-4493-445b-bdef-3463ab2d44e0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-f75063e0-4493-445b-bdef-3463ab2d44e0" title="Permalink to this equation">#</a></span>\[\begin{align}
+ S(\pmb{\bar{\beta}} + \pmb{\delta}) = &amp; \sum_{i}^n [y_i - f(x_i, \pmb{\bar{\beta}} + \pmb{\delta})]^2\\
+ \approx &amp; \sum_{i}^n [y_i - f(x_i, \pmb{\bar{\beta}}) - \pmb{J_i}\pmb{\delta}]^2\\
+\end{align}\]</div>
+<p>$</p>
+<p>Which <span class="math notranslate nohighlight">\(-\)</span> in vector notation <span class="math notranslate nohighlight">\(-\)</span> becomes:</p>
+<p>$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-08e40d58-6433-48e7-bfdf-5f0afcbd99e4">
+<span class="eqno">(3)<a class="headerlink" href="#equation-08e40d58-6433-48e7-bfdf-5f0afcbd99e4" title="Permalink to this equation">#</a></span>\[\begin{align}
+ S(\pmb{\bar{\beta}} + \pmb{\delta}) \approx &amp; ~||\pmb{y} - \pmb{f(\bar{\beta})} - \pmb{J}\pmb{\delta}||^2\\
+ = &amp; ~[\pmb{y} - \pmb{f(\bar{\beta})} - \pmb{J}\pmb{\delta}]^T[\pmb{y} - \pmb{f(\bar{\beta})} - \pmb{J}\pmb{\delta}]\\
+ = &amp; ~[\pmb{y} - \pmb{f(\bar{\beta})}]^T[\pmb{y} - \pmb{f(\bar{\beta})}] - [\pmb{y} - \pmb{f(\bar{\beta})}]^T\pmb{J}\pmb{\delta} - (\pmb{J}\pmb{\delta})^T[\pmb{y} - \pmb{f(\bar{\beta})}] + \pmb{\delta}^T\pmb{J}^T\pmb{J}\pmb{\delta}\\
+ = &amp; ~[\pmb{y} - \pmb{f(\bar{\beta})}]^T[\pmb{y} - \pmb{f(\bar{\beta})}] - 2[\pmb{y} - \pmb{f(\bar{\beta})}]^T\pmb{J}\pmb{\delta} + \pmb{\delta}^T\pmb{J}^T\pmb{J}\pmb{\delta}\\
+\end{align}\]</div>
+<p>$</p>
+<p>Now we take the derivative w/r to vector <span class="math notranslate nohighlight">\(\pmb{\delta}\)</span> (<a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_calculus"><em>this tables will help to follow the calculations</em></a>):</p>
+<p>$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5f12a567-5998-4601-8f2d-70fb67f747d7">
+<span class="eqno">(4)<a class="headerlink" href="#equation-5f12a567-5998-4601-8f2d-70fb67f747d7" title="Permalink to this equation">#</a></span>\[\begin{align}
+0 = &amp; ~{\partial S(\pmb{\bar{\beta}} + \pmb{\delta}) \over \partial\pmb{\delta}}\\
+= &amp;~ -2\pmb{J}^T[\pmb{y} - \pmb{f(\bar{\beta})}] + 2\pmb{J}^T\pmb{J}\pmb{\delta}\\
+= &amp;~ -\pmb{J}^T[\pmb{y} - \pmb{f(\bar{\beta})}] + \pmb{J}^T\pmb{J}\pmb{\delta}\\
+\end{align}\]</div>
+<p>$</p>
+<p>.. which, re-arranging, gives:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+ \pmb{\delta} = \left( \pmb{J}^T \pmb{J} \right)^{-1} \pmb{J}^T \left[\pmb{y} - \pmb{f}(\bar{\pmb{\beta}})\right] \tag{Eq. 3}
+\end{equation}
+\]</div>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> set of <span class="math notranslate nohighlight">\(p\)</span> linear equations (<span class="math notranslate nohighlight">\(p\)</span> = number of parameters) that <strong>can be solved for</strong> <span class="math notranslate nohighlight">\(\pmb{\delta}\)</span> !</p>
+<blockquote>
+<div><p>To get to a better minimum, we can just <strong>repeat the procedure</strong> by replacing the starting point: <span class="math notranslate nohighlight">\(\pmb{\bar{\beta}}^{\prime} = \pmb{\bar{\beta}} + \pmb{\delta}\)</span>, move to <span class="math notranslate nohighlight">\(\pmb{\bar{\beta}}^{\prime} + \pmb{\delta}^{\prime}\)</span>, etc. <br>
+… until we are happy.</p>
+</div></blockquote>
+</section>
+<section id="actual-levenberg-marquardt-algorithm">
+<h2>Actual Levenberg &amp; Marquardt algorithm<a class="headerlink" href="#actual-levenberg-marquardt-algorithm" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Equation 3 is known as <strong>Gauss-Newton</strong> method (1700-1800 <em>ca.</em>)</p></li>
+<li><p>The <strong>Levenberg</strong> modification (1944) is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+ \pmb{\delta} = \left( \pmb{J}^T \pmb{J} + \lambda \pmb{I} \right)^{-1} \pmb{J}^T \left[ \pmb{y} - \pmb{f}(\bar{\pmb{\beta}}) \right]
+\end{equation}
+\]</div>
+<p><span class="math notranslate nohighlight">\(\lambda\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> damping factor</p>
+<blockquote>
+<div><p>Helps for <strong>faster convergence</strong> and <strong>larger accuracy</strong> in finding the minimum</p>
+</div></blockquote>
+<p>Adjusted at each iteration:</p>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(S(\pmb{\beta})\)</span> decreases rapidly <span class="math notranslate nohighlight">\(\rightarrow\)</span> <span class="math notranslate nohighlight">\(\lambda\)</span> is decreased (<em>deceleration</em>)</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(S(\pmb{\beta})\)</span> doesn’t decrease enough <span class="math notranslate nohighlight">\(\rightarrow\)</span> <span class="math notranslate nohighlight">\(\lambda\)</span> is increased (<em>push</em>)</p></li>
+</ul>
+</section>
+<section id="further-reads">
+<h2>Further reads<a class="headerlink" href="#further-reads" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Marquardt</strong> contribution <span class="math notranslate nohighlight">\(\rightarrow\)</span> <a class="reference external" href="https://en.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm">wikipedia article on Levenberg-Marquardt algorithm</a></p></li>
+<li><p><strong>Stopping</strong> criteria <span class="math notranslate nohighlight">\(\rightarrow\)</span> <a class="reference external" href="https://en.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm">wikipedia article on Levenberg-Marquardt algorithm</a></p></li>
+<li><p><strong>Shortcomings</strong> of L-M <span class="math notranslate nohighlight">\(\rightarrow\)</span> <a class="reference external" href="https://python4mpia.github.io/fitting_data/least-squares-fitting.html">this blog</a></p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="chi-square-2-fitting">
+<h1>Chi-square (χ<span class="math notranslate nohighlight">\(^{2}\)</span>) fitting<a class="headerlink" href="#chi-square-2-fitting" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>Basically, it’s <strong>least squares for when data have uncertainties on y</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
+<span class="n">y_err</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y_err</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instead of minimizing the sum of squares <span class="math notranslate nohighlight">\(S(\pmb{\beta})\)</span>, we minimize the <strong>weighted average of the sum of squares</strong>, i.e., <span class="math notranslate nohighlight">\(\chi^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2 = \sum_i {(y_i - \hat{y_i})^2 \over \sigma_i^2}
+\]</div>
+<p>… where the weigths are the <strong>measurement uncertainties</strong> <span class="math notranslate nohighlight">\(\sigma_i\)</span>.</p>
+<section id="id1">
+<h2>Further reads<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Why do we use the “<strong>reduced</strong>” <span class="math notranslate nohighlight">\(\chi^2\)</span> to compare model results (i.e., <span class="math notranslate nohighlight">\(\chi_{\nu}^2\)</span>) ? <span class="math notranslate nohighlight">\(\rightarrow\)</span> <a class="reference external" href="https://arxiv.org/pdf/1012.3754.pdf">Andrae et al. 2010</a></p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="stochastic-gradient-descent-teaser">
+<h1>Stochastic Gradient Descent - teaser<a class="headerlink" href="#stochastic-gradient-descent-teaser" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Gradient descent</strong> is just one of the alternatives to L-M to <strong>minimize <span class="math notranslate nohighlight">\(S(\pmb{\beta})\)</span></strong></p>
+</div></blockquote>
+<p>The update of the parameters goes as:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+ \pmb{\beta}^\prime \leftarrow \pmb{\beta} - \eta \nabla S(\pmb{\beta}) \tag{Eq. 5}
+\end{equation}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\nabla\)</span> is the gradient of <span class="math notranslate nohighlight">\(S(\pmb{\beta})\)</span>.</p>
+<blockquote>
+<div><p>Meaning: <strong>descend</strong> along the <strong>gradient</strong> by a multiplicative factor <span class="math notranslate nohighlight">\(\eta\)</span></p>
+</div></blockquote>
+<p>For comparison <span class="math notranslate nohighlight">\(\rightarrow\)</span> In Levenberg’s algorithm (<em>Equation 4</em>), the factor <span class="math notranslate nohighlight">\(\lambda\)</span> was additive.</p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>The gradient becomes <strong>stochastic</strong> when the update of Equation 5 is done <strong>sample by sample</strong>:</p>
+<table><tr>
+    <td width=600>
+        <img src="images/SGD.png">
+    </td>
+</tr></table>
+<table><tr>
+    <td width=600>
+        <center>
+            <br>
+            Figure 1. Stochastic Gradient Descent in action.<br>
+            (From Figure 4-9 in <a href="https://github.com/ageron/handson-ml2">Gerone, A. "<i>Hands-on Machine Learning with Scikit-Learn, Keras and TensorFlow</i>"</a>)
+        </center>
+    </td>
+</tr></table>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>More on Gradient Descent in the</em> <code class="docutils literal notranslate"><span class="pre">DL_Intro</span></code> <em>notebook!</em></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="optimization-is-everywhere">
+<h1>Optimization is everywhere!<a class="headerlink" href="#optimization-is-everywhere" title="Link to this heading">#</a></h1>
+<p>In the next lectures you will see:</p>
+<ul class="simple">
+<li><p><strong>MLE</strong>: Maximum Likelihood Estimation</p></li>
+<li><p><strong>MCMC</strong>: Markov Chain Monte Carlo</p></li>
+<li><p><strong>Deep Learning</strong>: Neural Network Optimization</p></li>
+<li><p><strong>SBI</strong>: Simulation Based Inference</p></li>
+</ul>
+<p>… keep your mind open <span class="math notranslate nohighlight">\(-\)</span> you can interpret them as <u>different flavors</u> of <strong>optimization</strong>!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "astrostat25"
+        },
+        kernelOptions: {
+            name: "astrostat25",
+            path: "./Fitting_and_Optimization"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'astrostat25'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">AstroStat School 2026 — New York</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Bayesian/Bayesian_1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Bayesian Statistics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basics of Optimization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-parametric-fitting">What is [parametric] fitting</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-line-via-ordinary-least-squares-ols">Fitting a line via Ordinary Least Squares (OLS)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">Problem definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-python">In python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-python-an-easier-library">In python - an easier library</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#in-class-exercise-30-min">In-class Exercise [30 min]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-least-squares-levenberg-marquardt-algorithm">Non-linear least squares: Levenberg-Marquardt algorithm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brute-force-approach-spoiler-doesn-t-work">Brute-force approach (spoiler: doesn’t work!)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-approach-now-we-are-talking">Iterative approach (now we are talking!)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enough-with-the-crayons-now-math">Enough with the crayons - now, math!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actual-levenberg-marquardt-algorithm">Actual Levenberg &amp; Marquardt algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reads">Further reads</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-2-fitting">Chi-square (χ<span class="math notranslate nohighlight">\(^{2}\)</span>) fitting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Further reads</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-gradient-descent-teaser">Stochastic Gradient Descent - teaser</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-is-everywhere">Optimization is everywhere!</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

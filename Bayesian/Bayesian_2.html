@@ -1,0 +1,1381 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bayesian Statistics — Applied &#8212; AstroStat School 2026 — New York</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Bayesian/Bayesian_2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Introduction" href="../MCMC/MCMC.html" />
+    <link rel="prev" title="Introduction to Bayesian Statistics" href="Bayesian_1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — New York</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — New York
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Fitting_and_Optimization/Fitting_and_Optimization.html">Basics of Optimization</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bayesian Statistics — Applied</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">1. Introduction</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">ML Intro and Clustering</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7\8/blob/main/./Bayesian/Bayesian_2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Bayesian/Bayesian_2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bayesian Statistics — Applied</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bayesian Statistics — Applied</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-line">1. Fitting a line</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-from-an-unknown-distribution">1.1. The data from an unknown distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overplotting-two-potential-models-using-fiducial-parameters">1.2. Overplotting two potential models using fiducial parameters</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-prior-likelihood-and-posterior-assuming-gaussian-profile">1.3. Defining the prior, likelihood and posterior assuming Gaussian profile…</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maximizing-the-posterior">1.4. Maximizing the posterior</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repeating-using-a-cauchy-profile">1.5. Repeating using a Cauchy profile</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-models">2. Selecting models</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-ratio-prior-independent">2.1. Likelihood ratio (prior-independent)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-comparison-of-chi-2-values">Connection to comparison of <span class="math notranslate nohighlight">\(\chi^2\)</span> values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taking-into-account-the-flexibility-of-the-models">2.2. Taking into account the flexibility of the models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-akaike-information-criterion">The Akaike Information Criterion</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-is-a-penalty-term">k is a penalty term</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-information-criterion">The Bayesian Information Criterion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-factors">Bayesian Factors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-jeffreys-scale">The Jeffreys’ scale</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-compare-the-aics-bics">2.3. Let’s compare the AICs, BICs</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#helping-model-selection">3. Helping model selection</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-bayes-factor">4. Computing the Bayes Factor</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-bayesian-vs-frequentist">5. Discussion: Bayesian vs. Frequentist</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophical-foundations">5.1. <strong>Philosophical Foundations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-the-core-divergence">5.2. <strong>Priors: The Core Divergence</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-results">5.3. <strong>Interpretation of Results</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-astronomy-prefers-bayesian-statistics">5.4. <strong>Why Astronomy Prefers Bayesian Statistics</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-why-we-prefer-bayesian-methods-in-astronomy">Summary: Why We Prefer Bayesian Methods in Astronomy</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            Summer School for AstroStatistics in Sharjah 2025<br>
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="bayesian-statistics-applied">
+<h1>Bayesian Statistics — Applied<a class="headerlink" href="#bayesian-statistics-applied" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">style</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[ P(\textrm{hypothesis} | \textrm{data}, I) = \dfrac{P(\textrm{data} | \textrm{hypothesis}, I) P(\textrm{hypothesis} | I)}{P(\textrm{data} | I)} \]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="fitting-a-line">
+<h1>1. Fitting a line<a class="headerlink" href="#fitting-a-line" title="Link to this heading">#</a></h1>
+<p>In astronomy, a lot of information about the physical and emission properties of astronomical objects is accessed through spectroscopic measurements, i.e., the emission intensity as a function of wavelength/frequency. Interesting spectral features are emission or absorption lines. Naturally, the lines are not… lines, but narrow peaks! A true line is impossible due to quantum effects, but in addition, local/extended effects tend to “broaden” or alter the shape of spectal lines (e.g., thermal doppler, pressure, rotation of object,</p>
+<div class="math notranslate nohighlight">
+\[ y(x) = \dfrac{A}{1 + \left(\dfrac{x - x_0}{w}\right)^2}           \qquad \text{(Lorentzian or Cauchy model)}
+\]</div>
+<div class="math notranslate nohighlight">
+\[ y(x) = A \exp{\left[-\frac{\left(x - x_0\right)^2}{2 w^2}\right]} \qquad \text{(Gaussian or Normal model)}
+\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is the amplitude (notice that <span class="math notranslate nohighlight">\(y(x_0) = A\)</span> in both cases),</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_0\)</span> is the location parameter (the center of the line), and</p></li>
+<li><p><span class="math notranslate nohighlight">\(w\)</span> is the “spread” or width of the line.</p></li>
+</ul>
+<blockquote>
+<div><p>Notice that here we use the word Cauchy and Gaussian to refer to non-linear models rather than distributions. Our data follows the shape of the PDFs of these distributions, not the distributions themselves!</p>
+</div></blockquote>
+<p>Now, let’s assume we have measured the intensitities <span class="math notranslate nohighlight">\(y_i\)</span> at given (unitless) wavelengths <span class="math notranslate nohighlight">\(x_i\)</span>, and that the errors <span class="math notranslate nohighlight">\(e_i\)</span> are normally distributed with standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ y_i = y(x_i) + \epsilon_i, \qquad \epsilon_i \sim \text{Norm}(0, \sigma)\]</div>
+<section id="the-data-from-an-unknown-distribution">
+<h2>1.1. The data from an unknown distribution<a class="headerlink" href="#the-data-from-an-unknown-distribution" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2024</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model_dist</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">error_scale</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a spectral line following the PDF of a given distribution.</span>
+<span class="sd">    </span>
+<span class="sd">    x           : the wavelength</span>
+<span class="sd">    model_dist  : the distribution of which the PDF will be used</span>
+<span class="sd">    amplitude   : the maximum height of the spectral line</span>
+<span class="sd">    location    : the center of the spectral line</span>
+<span class="sd">    width       : the width of the spectral line</span>
+<span class="sd">    error_scale : the standard deviation of the observational uncertainties</span>
+<span class="sd">    </span>
+<span class="sd">    NOTE: use default `error_scale` (0.0) to get a model instead of an observational sample.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">distribution</span> <span class="o">=</span> <span class="n">model_dist</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">y</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">error_scale</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">error_scale</span><span class="p">)</span>
+    <span class="n">y_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">error_scale</span>
+    <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_err</span>
+
+
+<span class="n">n_data</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># two potential distributions</span>
+<span class="n">model_distributions</span> <span class="o">=</span> <span class="p">[</span><span class="n">st</span><span class="o">.</span><span class="n">cauchy</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="p">]</span>
+<span class="n">model_distributions_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Cauchy&quot;</span><span class="p">,</span> <span class="s2">&quot;Normal&quot;</span><span class="p">]</span>
+
+<span class="c1"># select pseudo-randomly the true distribution</span>
+<span class="n">random_index</span> <span class="o">=</span> <span class="mi">2023</span> <span class="o">%</span> <span class="mi">17</span> <span class="o">%</span> <span class="mi">2</span>
+<span class="n">true_model_distribution</span> <span class="o">=</span> <span class="n">model_distributions</span><span class="p">[</span><span class="n">random_index</span><span class="p">]</span>
+<span class="n">true_model_distribution_name</span> <span class="o">=</span> <span class="n">model_distributions_names</span><span class="p">[</span><span class="n">random_index</span><span class="p">]</span>
+
+<span class="c1"># Permitted ranges for the parameters (because we processed the data and we have some intuition)</span>
+<span class="n">MIN_AMPLITUDE</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">MAX_AMPLITUDE</span> <span class="o">=</span> <span class="mf">1.1</span>
+<span class="n">MIN_LOCATION</span> <span class="o">=</span> <span class="mf">0.45</span>
+<span class="n">MAX_LOCATION</span> <span class="o">=</span> <span class="mf">0.55</span>
+<span class="n">MIN_WIDTH</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">MAX_WIDTH</span> <span class="o">=</span> <span class="mf">0.15</span>
+
+<span class="c1"># Select the true parameters (these are supposed to be hidden from us)</span>
+<span class="n">true_amplitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">MIN_AMPLITUDE</span><span class="p">,</span> <span class="n">MAX_AMPLITUDE</span><span class="p">)</span>
+<span class="n">true_location</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">MIN_LOCATION</span><span class="p">,</span> <span class="n">MAX_LOCATION</span><span class="p">)</span>
+<span class="n">true_width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">MIN_WIDTH</span><span class="p">,</span> <span class="n">MAX_WIDTH</span><span class="p">)</span>
+
+<span class="c1"># Make the new data according to the true model</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">n_data</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">/</span><span class="n">n_data</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">/</span><span class="n">n_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_data</span><span class="p">)</span>
+<span class="n">y_data</span><span class="p">,</span> <span class="n">e_data</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">true_model_distribution</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="n">true_amplitude</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">true_location</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">true_width</span><span class="p">,</span> <span class="n">error_scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Plot them!</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">e_data</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;k.&quot;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="overplotting-two-potential-models-using-fiducial-parameters">
+<h2>1.2. Overplotting two potential models using fiducial parameters<a class="headerlink" href="#overplotting-two-potential-models-using-fiducial-parameters" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use the midpoints of the permitted ranges of the parameters</span>
+<span class="n">fiducial_amplitude</span> <span class="o">=</span> <span class="p">(</span><span class="n">MIN_AMPLITUDE</span> <span class="o">+</span> <span class="n">MAX_AMPLITUDE</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="n">fiducial_location</span> <span class="o">=</span> <span class="p">(</span><span class="n">MIN_LOCATION</span> <span class="o">+</span> <span class="n">MAX_LOCATION</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="n">fiducial_width</span> <span class="o">=</span> <span class="p">(</span><span class="n">MIN_WIDTH</span> <span class="o">+</span> <span class="n">MAX_WIDTH</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="s2">&quot;ks&quot;</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">model_distribution</span> <span class="ow">in</span> <span class="n">model_distributions</span><span class="p">:</span>
+    <span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">y_plot</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> 
+                          <span class="n">model_distribution</span><span class="p">,</span>            <span class="c1"># try this model</span>
+                          <span class="n">amplitude</span><span class="o">=</span><span class="n">fiducial_amplitude</span><span class="p">,</span>  <span class="c1"># fiducial...</span>
+                          <span class="n">location</span><span class="o">=</span><span class="n">fiducial_location</span><span class="p">,</span>    <span class="c1"># ...parameters...</span>
+                          <span class="n">width</span><span class="o">=</span><span class="n">fiducial_width</span><span class="p">,</span>          <span class="c1"># ...from ranges</span>
+                          <span class="n">error_scale</span><span class="o">=</span><span class="mf">0.0</span>                <span class="c1"># the prediction does not have uncertainty</span>
+                         <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">model_distribution</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><u><strong>In-class discussion: The plotted models use fiducial values for the parameters. However to you think one fits best than the other?</strong></u></p>
+<p><em>Discuss with your teammate, then report.</em></p>
+<details>
+<summary><b>[Spoiler]</b></summary>
+<br>
+It's purely subjective at this point!
+<br>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="defining-the-prior-likelihood-and-posterior-assuming-gaussian-profile">
+<h1>1.3. Defining the prior, likelihood and posterior assuming Gaussian profile…<a class="headerlink" href="#defining-the-prior-likelihood-and-posterior-assuming-gaussian-profile" title="Link to this heading">#</a></h1>
+<p><strong>Reminder</strong>: we operate in log-space (log-prior, log-likelihood, log-posterion) for numerical reasons.</p>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Task:</strong>  Complete the functions. Hint: the <code class="docutils literal notranslate"><span class="pre">make_data</span></code> function can be used to get model predictions as well!</p>
+<p><strong>Warning</strong>: the function returns two things!</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ln_prior</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ln_likelihood_norm</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ln_posterior_norm</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ln_prior</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">MIN_AMPLITUDE</span> <span class="o">&lt;</span> <span class="n">amplitude</span> <span class="o">&lt;</span> <span class="n">MAX_AMPLITUDE</span> <span class="ow">and</span> <span class="n">MIN_LOCATION</span> <span class="o">&lt;</span> <span class="n">location</span> <span class="o">&lt;</span> <span class="n">MAX_LOCATION</span> <span class="ow">and</span> <span class="n">MIN_WIDTH</span> <span class="o">&lt;</span> <span class="n">width</span> <span class="o">&lt;</span> <span class="n">MAX_WIDTH</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ln_likelihood_norm</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="n">y_pred</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">model_dist</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="n">chi2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_data</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">e_data</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">chi2</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ln_posterior_norm</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">ln_prior</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span> <span class="o">+</span> <span class="n">ln_likelihood_norm</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div><p><strong>(Reminder) From cell above:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Permitted ranges for the parameters (because we processed the data and we have some intuition)</span>
+<span class="n">MIN_AMPLITUDE</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">MAX_AMPLITUDE</span> <span class="o">=</span> <span class="mf">1.1</span>
+<span class="n">MIN_LOCATION</span> <span class="o">=</span> <span class="mf">0.45</span>
+<span class="n">MAX_LOCATION</span> <span class="o">=</span> <span class="mf">0.55</span>
+<span class="n">MIN_WIDTH</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">MAX_WIDTH</span> <span class="o">=</span> <span class="mf">0.15</span>
+
+<span class="c1"># Our observed data</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">n_data</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">/</span><span class="n">n_data</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">/</span><span class="n">n_data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_data</span><span class="p">)</span>
+<span class="n">y_data</span><span class="p">,</span> <span class="n">e_data</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">true_model_distribution</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="n">true_amplitude</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">true_location</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">true_width</span><span class="p">,</span> <span class="n">error_scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>(Reminder): From MLE notebook:</strong></p>
+<p>Under the assumption of Gaussian uncertainties and independence of data,
+$<span class="math notranslate nohighlight">\(
+\ln L = \text{constant} - \frac{1}{2} \sum_{i=1}^{N} {\dfrac{(y_i-f(x_i))^2}{\sigma_i^2}} = \text{constant} - \frac{\chi^2}{2}
+\)</span>$</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="maximizing-the-posterior">
+<h1>1.4. Maximizing the posterior<a class="headerlink" href="#maximizing-the-posterior" title="Link to this heading">#</a></h1>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Define the function to be minimized in order to maximize the posterior.</p></li>
+<li><p>Choose appropriate starting values for the minimization routine.</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">neg_ln_posterior_norm</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">theta</span>
+    <span class="k">return</span> <span class="o">...</span>
+
+<span class="n">min_result_norm</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">neg_ln_posterior_norm</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">)</span>
+<span class="n">est_amplitude</span><span class="p">,</span> <span class="n">est_location</span><span class="p">,</span> <span class="n">est_width</span> <span class="o">=</span> <span class="n">min_result_norm</span><span class="o">.</span><span class="n">x</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">min_result_norm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| PARAMETER  |  ESTIMATION  |  TRUTH  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| amplitude  | </span><span class="si">{</span><span class="n">est_amplitude</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_amplitude</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| location   | </span><span class="si">{</span><span class="n">est_location</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_location</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| width      | </span><span class="si">{</span><span class="n">est_width</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_width</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At best-fitting values...&quot;</span><span class="p">)</span>
+<span class="n">lnL_norm</span> <span class="o">=</span> <span class="n">ln_likelihood_norm</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_norm</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="n">lnP_norm</span> <span class="o">=</span> <span class="n">ln_posterior_norm</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_norm</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-prior      : </span><span class="si">{</span><span class="n">ln_prior</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_norm</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-likelihood : </span><span class="si">{</span><span class="n">lnL_norm</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-posterior  : </span><span class="si">{</span><span class="n">lnP_norm</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">neg_ln_posterior_norm</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">theta</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">ln_posterior_norm</span><span class="p">(</span><span class="n">amplitude</span><span class="o">=</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+
+<span class="n">min_result_norm</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">neg_ln_posterior_norm</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="n">fiducial_amplitude</span><span class="p">,</span> <span class="n">fiducial_location</span><span class="p">,</span> <span class="n">fiducial_width</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">)</span>
+<span class="n">est_amplitude</span><span class="p">,</span> <span class="n">est_location</span><span class="p">,</span> <span class="n">est_width</span> <span class="o">=</span> <span class="n">min_result_norm</span><span class="o">.</span><span class="n">x</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">min_result_norm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| PARAMETER  |  ESTIMATION  |  TRUTH  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| amplitude  | </span><span class="si">{</span><span class="n">est_amplitude</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_amplitude</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| location   | </span><span class="si">{</span><span class="n">est_location</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_location</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| width      | </span><span class="si">{</span><span class="n">est_width</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_width</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At best-fitting values...&quot;</span><span class="p">)</span>
+<span class="n">lnL_norm</span> <span class="o">=</span> <span class="n">ln_likelihood_norm</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_norm</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="n">lnP_norm</span> <span class="o">=</span> <span class="n">ln_posterior_norm</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_norm</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-prior      : </span><span class="si">{</span><span class="n">ln_prior</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_norm</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-likelihood : </span><span class="si">{</span><span class="n">lnL_norm</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-posterior  : </span><span class="si">{</span><span class="n">lnP_norm</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div><p><u><strong>In-class discussion: The fit was successful and we got parameters close to the truth. Is the Gaussian model validated?</strong></u></p>
+<p><em>Discuss with your teammate, then report.</em></p>
+<details>
+<summary><b>[Spoiler]</b></summary>
+<br>
+As in hypothesis testing, the model is assumed to be true. The fitting process does not validate the model. The value of the log-posterior does not convey any information regarding the validity of the model.
+<br>
+<section id="repeating-using-a-cauchy-profile">
+<h2>1.5. Repeating using a Cauchy profile<a class="headerlink" href="#repeating-using-a-cauchy-profile" title="Link to this heading">#</a></h2>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Tasks:</strong>  Do the same steps for the Cauchy profile.</p>
+<ol class="arabic simple">
+<li><p>Complete the functions.</p></li>
+<li><p>Choose appropriate starting values for the minimization routine.</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ln_likelihood_cauchy</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ln_posterior_cauchy</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">neg_ln_posterior_cauchy</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">theta</span>
+    <span class="k">return</span> <span class="o">...</span>
+
+<span class="n">min_result_cauchy</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">neg_ln_posterior_cauchy</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">)</span>
+<span class="n">est_amplitude</span><span class="p">,</span> <span class="n">est_location</span><span class="p">,</span> <span class="n">est_width</span> <span class="o">=</span> <span class="n">min_result_cauchy</span><span class="o">.</span><span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">min_result_cauchy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| PARAMETER  |  ESTIMATION  |  TRUTH  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| amplitude  | </span><span class="si">{</span><span class="n">est_amplitude</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_amplitude</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| location   | </span><span class="si">{</span><span class="n">est_location</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_location</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| width      | </span><span class="si">{</span><span class="n">est_width</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_width</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At best-fitting values...&quot;</span><span class="p">)</span>
+<span class="n">lnL_cauchy</span> <span class="o">=</span> <span class="n">ln_likelihood_cauchy</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_cauchy</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="n">lnP_cauchy</span> <span class="o">=</span> <span class="n">ln_posterior_cauchy</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_cauchy</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-prior      : </span><span class="si">{</span><span class="n">ln_prior</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_cauchy</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-likelihood : </span><span class="si">{</span><span class="n">lnL_cauchy</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-posterior  : </span><span class="si">{</span><span class="n">lnP_cauchy</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ln_likelihood_cauchy</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="n">y_pred</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">model_dist</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">cauchy</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="n">chi2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_data</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">e_data</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">chi2</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ln_posterior_cauchy</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">ln_prior</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span> <span class="o">+</span> <span class="n">ln_likelihood_cauchy</span><span class="p">(</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">neg_ln_posterior_cauchy</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">theta</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">ln_posterior_cauchy</span><span class="p">(</span><span class="n">amplitude</span><span class="o">=</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+
+<span class="n">min_result_cauchy</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">neg_ln_posterior_cauchy</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="n">fiducial_amplitude</span><span class="p">,</span> <span class="n">fiducial_location</span><span class="p">,</span> <span class="n">fiducial_width</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">)</span>
+<span class="n">est_amplitude</span><span class="p">,</span> <span class="n">est_location</span><span class="p">,</span> <span class="n">est_width</span> <span class="o">=</span> <span class="n">min_result_cauchy</span><span class="o">.</span><span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">min_result_cauchy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| PARAMETER  |  ESTIMATION  |  TRUTH  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| amplitude  | </span><span class="si">{</span><span class="n">est_amplitude</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_amplitude</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| location   | </span><span class="si">{</span><span class="n">est_location</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_location</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| width      | </span><span class="si">{</span><span class="n">est_width</span><span class="si">:</span><span class="s2">11.3f</span><span class="si">}</span><span class="s2">  | </span><span class="si">{</span><span class="n">true_width</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2">  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At best-fitting values...&quot;</span><span class="p">)</span>
+<span class="n">lnL_cauchy</span> <span class="o">=</span> <span class="n">ln_likelihood_cauchy</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_cauchy</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="n">lnP_cauchy</span> <span class="o">=</span> <span class="n">ln_posterior_cauchy</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_cauchy</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-prior      : </span><span class="si">{</span><span class="n">ln_prior</span><span class="p">(</span><span class="o">*</span><span class="n">min_result_cauchy</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-likelihood : </span><span class="si">{</span><span class="n">lnL_cauchy</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * log-posterior  : </span><span class="si">{</span><span class="n">lnP_cauchy</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div><p><u><strong>In-class discussion: What can you infer from the comparison between the resulting when assuming normal vs. Cauchy?</strong></u></p>
+<p><em>Discuss with your teammate, then report.</em></p>
+<details>
+<summary><b>[Spoiler]</b></summary>
+<br>
+The parameters are in both cases close to the truth. Whether they are closer or not, in practice, we cannot use in real data because we don't know the truth!
+The likelihood and posterior is, however, different! Maybe we can use this?
+<br>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="selecting-models">
+<h1>2. Selecting models<a class="headerlink" href="#selecting-models" title="Link to this heading">#</a></h1>
+<p>If we don’t know the correct model for the data (<span class="math notranslate nohighlight">\(D\)</span>), then we have a model selection problem. We should come up with all potential models, or at least those expected from our prior experience with the data and the underlying mechanisms decribing them.</p>
+<p>In the case above we have the Normal and Cuachy model. Let’s name them A and B respectively. We can compare the posteriors by taking their ratio:</p>
+<p>Posterior odds: <span class="math notranslate nohighlight">\( \dfrac{P(A|D)}{P(B|D)} \)</span></p>
+<p>Using the Bayes rule we can express it in the following way:</p>
+<div class="math notranslate nohighlight">
+\[ \dfrac{P(A|D)}{P(B|D)} = \dfrac{P(D|A)P(A) / P(D)}{P(D|B)P(B) / P(D)} = \dfrac{P(D|A)P(A)}{P(D|B)P(B)}\]</div>
+<section id="likelihood-ratio-prior-independent">
+<h2>2.1. Likelihood ratio (prior-independent)<a class="headerlink" href="#likelihood-ratio-prior-independent" title="Link to this heading">#</a></h2>
+<p>As we can see, the results depend on our prior belief on the models. In many cases, we want to be completely fair, and therefore we assign equal prior to both of them, resulting in:</p>
+<div class="math notranslate nohighlight">
+\[ \dfrac{P(D|A)}{P(D|B)} \]</div>
+<p>which is also used by <strong>frequentists</strong> under the name <strong>likelihood ratio statistic</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ \mathrm{LR}_{AB} = \dfrac{L_A}{L_B} = e^{l_A - l_B} \]</div>
+<p>where the <span class="math notranslate nohighlight">\(l_A\)</span> and <span class="math notranslate nohighlight">\(l_B\)</span> are the log-likelihoods for convenience.</p>
+<blockquote>
+<div><p>The larger the likelihood ratio, the more preferred Model A is with respect to Model B</p>
+</div></blockquote>
+<section id="connection-to-comparison-of-chi-2-values">
+<h3>Connection to comparison of <span class="math notranslate nohighlight">\(\chi^2\)</span> values<a class="headerlink" href="#connection-to-comparison-of-chi-2-values" title="Link to this heading">#</a></h3>
+<p>Under the assumption of Gaussian errors, then our log-likelihood is: <em>(some constant)</em> <span class="math notranslate nohighlight">\(-\chi^2\)</span>. Therefore, if we compute the <span class="math notranslate nohighlight">\(\chi^2\)</span> values of the best fitting parameters for our models A and B, then the likelihood ratio is:</p>
+<div class="math notranslate nohighlight">
+\[ \mathrm{LR}_{AB} = e^{l_A - l_B} = e^{-\chi_A^2+\chi_B^2} \]</div>
+<p>so the model with smallest <span class="math notranslate nohighlight">\(\chi^2\)</span> is preferred.</p>
+</section>
+</section>
+<section id="taking-into-account-the-flexibility-of-the-models">
+<h2>2.2. Taking into account the flexibility of the models<a class="headerlink" href="#taking-into-account-the-flexibility-of-the-models" title="Link to this heading">#</a></h2>
+<p>In classical statistics, we don’t compare <span class="math notranslate nohighlight">\(\chi^2\)</span> values, but the <strong>reduced-<span class="math notranslate nohighlight">\(\chi^2\)</span></strong> which is divided by the degrees of freedom (number of data point - number of model parameters) to penalize complicated models that can fit the data easily without necessarily being the true model. In Bayesian statistics there are varous tools:</p>
+<section id="the-akaike-information-criterion">
+<h3>The Akaike Information Criterion<a class="headerlink" href="#the-akaike-information-criterion" title="Link to this heading">#</a></h3>
+<p>If we use a model to represent the data, we lose information! There is structure/noise/etc. that we have lost! AIC measures the amount of information that is lost, <strong>relative to another model</strong>.</p>
+<p>A good model “extracts” or “represents” most of the information from a system, or… it maximizes its entropy! The AIC is the application of the Second Law of Thermodynamics on statistics using information theory (cf. <em>Shannon’s information entropy</em>).</p>
+<div class="math notranslate nohighlight">
+\[
+\text{AIC} = 2k - 2\ln L
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k\)</span> is the number of parameters of the model (if we had to estimate them from the data), and <span class="math notranslate nohighlight">\(L\)</span> is the likelihood of the data according to the model.</p>
+<blockquote>
+<div><p>The larger the AIC, the more information is lost, so the worst for our model!</p>
+</div></blockquote>
+<section id="k-is-a-penalty-term">
+<h4>k is a penalty term<a class="headerlink" href="#k-is-a-penalty-term" title="Link to this heading">#</a></h4>
+<p>Using a 100-degree polynomial or a k-nearest neighbor interpolator, we could capture all trends in the data. However, this is just shifting all the information into parameters - it’s not fair to compare something like that against a linear model!</p>
+</section>
+</section>
+<section id="the-bayesian-information-criterion">
+<h3>The Bayesian Information Criterion<a class="headerlink" href="#the-bayesian-information-criterion" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\text{BIC} = k \ln N - 2\ln L
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> is the size of the sample used to calculate the likelihood.</p>
+<p>AIC vs. BIC: it’s complicated…</p>
+<blockquote>
+<div><p>As in AIC, the larger the BIC, the more information is lost, so the worst for our model!</p>
+</div></blockquote>
+</section>
+<section id="bayesian-factors">
+<h3>Bayesian Factors<a class="headerlink" href="#bayesian-factors" title="Link to this heading">#</a></h3>
+<p>Like the likelihood ratio, but here, the likelihoods are not that of the best fit. It takes into account all possible values for the parameters (which can be different in each model), <span class="math notranslate nohighlight">\(\theta\)</span>!</p>
+<div class="math notranslate nohighlight">
+\[
+\text{K} = \dfrac{P(D|A)}{P(D|B)} = \dfrac{\int P(\theta_A) P(D|\theta_A, A) d\theta} {\int P(\theta_B) P(D|\theta_B, B) d\theta}
+\]</div>
+<blockquote>
+<div><p>As in the likelihood ratio, the larger the value, the better for Model A compared to Model B!</p>
+</div></blockquote>
+</section>
+<section id="the-jeffreys-scale">
+<h3>The Jeffreys’ scale<a class="headerlink" href="#the-jeffreys-scale" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Bayes Factor</p></th>
+<th class="head"><p>Strength of evidence</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1 - 3.2</p></td>
+<td><p>Not worth more than a bare mention</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.2 - 10</p></td>
+<td><p>Substantial</p></td>
+</tr>
+<tr class="row-even"><td><p>10 - 100</p></td>
+<td><p>Strong</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;100</p></td>
+<td><p>Decisive</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="let-s-compare-the-aics-bics">
+<h2>2.3. Let’s compare the AICs, BICs<a class="headerlink" href="#let-s-compare-the-aics-bics" title="Link to this heading">#</a></h2>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Task:</strong>  Calculate the AICs and BICs, and decide which model <em>won</em>!</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AIC_norm</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">AIC_cauchy</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="n">BIC_norm</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">BIC_cauchy</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AIC (norm, cauchy):&quot;</span><span class="p">,</span> <span class="n">AIC_norm</span><span class="p">,</span> <span class="n">AIC_cauchy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BIC (norm, cauchy):&quot;</span><span class="p">,</span> <span class="n">BIC_norm</span><span class="p">,</span> <span class="n">BIC_cauchy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Posterior ratio (norm / cauchy)  =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lnP_norm</span> <span class="o">-</span> <span class="n">lnP_cauchy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Posterior ratio (cauchy / norm)  =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lnP_cauchy</span> <span class="o">-</span> <span class="n">lnP_norm</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;And the truth is.... (drum roll)... The&quot;</span><span class="p">,</span> <span class="n">true_model_distribution_name</span><span class="p">,</span> <span class="s2">&quot;distribution!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AIC_norm</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lnL_norm</span>
+<span class="n">AIC_cauchy</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lnL_cauchy</span>
+
+<span class="n">BIC_norm</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n_data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lnL_norm</span>
+<span class="n">BIC_cauchy</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n_data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lnL_cauchy</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AIC (norm, cauchy):&quot;</span><span class="p">,</span> <span class="n">AIC_norm</span><span class="p">,</span> <span class="n">AIC_cauchy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BIC (norm, cauchy):&quot;</span><span class="p">,</span> <span class="n">BIC_norm</span><span class="p">,</span> <span class="n">BIC_cauchy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Posterior ratio (norm / cauchy)  =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lnP_norm</span> <span class="o">-</span> <span class="n">lnP_cauchy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Posterior ratio (cauchy / norm)  =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lnP_cauchy</span> <span class="o">-</span> <span class="n">lnP_norm</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;And the truth is.... (drum roll)... The&quot;</span><span class="p">,</span> <span class="n">true_model_distribution_name</span><span class="p">,</span> <span class="s2">&quot;distribution!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="helping-model-selection">
+<h1>3. Helping model selection<a class="headerlink" href="#helping-model-selection" title="Link to this heading">#</a></h1>
+<p><u><strong>In-class discussion: What could you change to increase the contrast between the models??</strong></u></p>
+<p><em>Discuss with your teammate, then report.</em></p>
+<details>
+<summary><b>[Spoiler]</b></summary>
+<br>
+Since the models cannot change, data have to. Only if we get more data we can be more confident in selecting models. Increase the size of the synthetic data and try again!
+<br>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computing-the-bayes-factor">
+<h1>4. Computing the Bayes Factor<a class="headerlink" href="#computing-the-bayes-factor" title="Link to this heading">#</a></h1>
+<p>Bayes Factors are agnostic about the location of the posterior maximum! They use the <em>marginal likelihood</em> or the <em>evidence</em>: the integral of the likelihood over all possible values of the parameters.</p>
+<p>This makes them hard to compute, especially in complex, multi-dimensional parameter spaces. Thankfully, there are techniques like <strong>Monte Carlo integration</strong> that can help us.</p>
+<p>Essentially, instead of integrating a function over <span class="math notranslate nohighlight">\(x\)</span>, we use the sum of uniform samples of <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \int\limits_a^b f(x) dx \approx \frac{b-a}{N} \sum\limits_{i=1}^N f(x_i) \]</div>
+<p>or in <span class="math notranslate nohighlight">\(k\)</span> dimensions, a sum over the whole volume <span class="math notranslate nohighlight">\(V\)</span> of the multi-dimensional parameter space <span class="math notranslate nohighlight">\(\Omega\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \int_\Omega f(\vec{x}) d\vec{x} \approx \frac{V}{N} \sum\limits_{i=1}^N f(\vec{x}_i)\]</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Choose a sample size for the Monte Carlo calculation.</p></li>
+<li><p>Calculate the Bayes factor.</p></li>
+<li><p>Which model is preferred? Does this agree with AIC and BIC?</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">amp_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">MIN_AMPLITUDE</span><span class="p">,</span> <span class="n">MAX_AMPLITUDE</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sample_size</span><span class="p">)</span>
+<span class="n">loc_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">MIN_LOCATION</span><span class="p">,</span> <span class="n">MAX_LOCATION</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sample_size</span><span class="p">)</span>
+<span class="n">wid_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">MIN_WIDTH</span><span class="p">,</span> <span class="n">MAX_WIDTH</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sample_size</span><span class="p">)</span>
+
+<span class="c1"># use no normalization factor (watch out for the NaNs)</span>
+<span class="n">ln_norm_factor</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normalization factor:&quot;</span><span class="p">,</span> <span class="n">ln_norm_factor</span><span class="p">)</span>
+
+<span class="n">sum_norm</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">sum_cauchy</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="k">for</span> <span class="n">amp</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">wid</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">amp_samples</span><span class="p">,</span> <span class="n">loc_samples</span><span class="p">,</span> <span class="n">wid_samples</span><span class="p">):</span>
+    <span class="n">sum_norm</span> <span class="o">+=</span> <span class="o">...</span>
+    <span class="n">sum_cauchy</span> <span class="o">+=</span> <span class="o">...</span>
+    
+<span class="n">K</span> <span class="o">=</span> <span class="n">sum_norm</span> <span class="o">/</span> <span class="n">sum_cauchy</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;K (norm / cauchy): </span><span class="si">{</span><span class="n">K</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;K (cauchy / norm): </span><span class="si">{</span><span class="mf">1.0</span><span class="o">/</span><span class="n">K</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">amp_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">MIN_AMPLITUDE</span><span class="p">,</span> <span class="n">MAX_AMPLITUDE</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sample_size</span><span class="p">)</span>
+<span class="n">loc_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">MIN_LOCATION</span><span class="p">,</span> <span class="n">MAX_LOCATION</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sample_size</span><span class="p">)</span>
+<span class="n">wid_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">MIN_WIDTH</span><span class="p">,</span> <span class="n">MAX_WIDTH</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sample_size</span><span class="p">)</span>
+
+<span class="c1"># use no normalization factor (watch out for the NaNs)</span>
+<span class="c1"># ln_norm_factor = 0.0</span>
+<span class="c1"># use the first random point to get the normalization factor</span>
+<span class="n">ln_norm_factor</span> <span class="o">=</span> <span class="n">ln_likelihood_norm</span><span class="p">(</span><span class="n">amp_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">loc_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">wid_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normalization factor:&quot;</span><span class="p">,</span> <span class="n">ln_norm_factor</span><span class="p">)</span>
+
+<span class="n">sum_norm</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">sum_cauchy</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="k">for</span> <span class="n">amp</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">wid</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">amp_samples</span><span class="p">,</span> <span class="n">loc_samples</span><span class="p">,</span> <span class="n">wid_samples</span><span class="p">):</span>
+    <span class="n">sum_norm</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_likelihood_norm</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">wid</span><span class="p">)</span> <span class="o">-</span> <span class="n">ln_norm_factor</span><span class="p">)</span>
+    <span class="n">sum_cauchy</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_likelihood_cauchy</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">wid</span><span class="p">)</span> <span class="o">-</span> <span class="n">ln_norm_factor</span><span class="p">)</span>
+    
+<span class="n">K</span> <span class="o">=</span> <span class="n">sum_norm</span> <span class="o">/</span> <span class="n">sum_cauchy</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;K (norm / cauchy): </span><span class="si">{</span><span class="n">K</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;K (cauchy / norm): </span><span class="si">{</span><span class="mf">1.0</span><span class="o">/</span><span class="n">K</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div></section>
+<section class="tex2jax_ignore mathjax_ignore" id="discussion-bayesian-vs-frequentist">
+<h1>5. Discussion: Bayesian vs. Frequentist<a class="headerlink" href="#discussion-bayesian-vs-frequentist" title="Link to this heading">#</a></h1>
+<p><u><strong>In-class discussion: What are the main differences between the two approaches? Which one we prefer in astronomy/cosmology?</strong></u></p>
+<section id="philosophical-foundations">
+<h2>5.1. <strong>Philosophical Foundations</strong><a class="headerlink" href="#philosophical-foundations" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Frequentist Perspective</p></th>
+<th class="head"><p>Bayesian Perspective</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>What is probability?</strong></p></td>
+<td><p>Long-run relative frequency in repeated, identical experiments</p></td>
+<td><p>Rational degree of belief, or a quantification of uncertainty, given current information</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Unknown parameters</strong></p></td>
+<td><p>Fixed but unknown</p></td>
+<td><p>Random variables with probability distributions</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Data</strong></p></td>
+<td><p>Random (from repeated sampling)</p></td>
+<td><p>Fixed (once observed)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Goal</strong></p></td>
+<td><p>Procedures that perform well under repetition</p></td>
+<td><p>Reasonable inference given the data at hand</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><em>Frequentist inference</em> asks: “How would this method perform if we repeated the experiment many times?”</p></li>
+<li><p><em>Bayesian inference</em> asks: “Given the data I observed, what do I believe about the parameters?”</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="priors-the-core-divergence">
+<h2>5.2. <strong>Priors: The Core Divergence</strong><a class="headerlink" href="#priors-the-core-divergence" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Bayesian</strong>: Introduces <em>priors</em> to express existing knowledge or ignorance.</p></li>
+<li><p><strong>Frequentist</strong>: No priors allowed—everything must come from the data.</p></li>
+</ul>
+<p><strong>Debate</strong>: Are priors a strength or a weakness?</p>
+<ul class="simple">
+<li><p>Bayesian view: Priors encode assumptions transparently—and they are always present, implicitly or explicitly.</p></li>
+<li><p>Frequentist view: Priors are subjective and make results “non-objective”.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Thought experiment</strong>: The librarian vs the farmer</p>
+<p>You observe someone who is shy, bookish, and wears glasses. What’s the probability they are a librarian vs a farmer?
+Likelihood favors librarian: that description matches stereotypes.
+Prior tells you: there are many more farmers than librarians.
+➡ A frequentist might ignore the base rate (prior).
+➡ A Bayesian correctly updates prior beliefs using new data.</p>
+</div></blockquote>
+<p><em>Sometimes data alone isn’t enough, especially with rare events.</em></p>
+<blockquote>
+<div><p>In astronomy, <strong>priors are often available and meaningful</strong> (e.g., stellar populations, cosmological parameters, object brightness, etc.).</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="interpretation-of-results">
+<h2>5.3. <strong>Interpretation of Results</strong><a class="headerlink" href="#interpretation-of-results" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Inference Type</p></th>
+<th class="head"><p>Frequentist Example</p></th>
+<th class="head"><p>Bayesian Equivalent</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Confidence Interval</p></td>
+<td><p>“If we repeated the experiment many times, 95% of the intervals would contain the true value.”</p></td>
+<td><p>“Given the observed data, there is a 95% probability that the true value lies in this interval.”</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hypothesis Testing</p></td>
+<td><p>p-value: probability of data at least as extreme if null is true</p></td>
+<td><p>Posterior probability of hypothesis (requires model comparison)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>➡ <strong>Confidence intervals ≠ credible intervals.</strong>
+➡ <strong>p-values ≠ probabilities of hypotheses.</strong></p>
+<hr class="docutils" />
+</section>
+<section id="why-astronomy-prefers-bayesian-statistics">
+<h2>5.4. <strong>Why Astronomy Prefers Bayesian Statistics</strong><a class="headerlink" href="#why-astronomy-prefers-bayesian-statistics" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Unrepeatable experiments</strong>:</p>
+<ul class="simple">
+<li><p>We only observe <em>one universe</em>, <em>one supernova</em>, <em>one gravitational lens system</em>.</p></li>
+<li><p>Frequentist “long-run” logic doesn’t apply.</p></li>
+<li><p>Bayesian reasoning is well-suited to one-off inference.</p></li>
+</ul>
+</li>
+<li><p><strong>Complex models</strong>:</p>
+<ul class="simple">
+<li><p>Hierarchical models, forward models, simulators.</p></li>
+<li><p>Easy to implement in Bayesian frameworks (via priors, marginalization, MCMC).</p></li>
+</ul>
+</li>
+<li><p><strong>Incomplete data and selection effects</strong>:</p>
+<ul class="simple">
+<li><p>Bayesian inference naturally handles censoring, missing data, and selection functions (e.g., Malmquist bias).</p></li>
+</ul>
+</li>
+<li><p><strong>Combination of datasets</strong>:</p>
+<ul class="simple">
+<li><p>Priors from one dataset naturally become posteriors for another.</p></li>
+<li><p>Elegant propagation of knowledge between instruments (e.g., Gaia + JWST + Euclid).</p></li>
+</ul>
+</li>
+<li><p><strong>Uncertainty quantification</strong>:</p>
+<ul class="simple">
+<li><p>Full posterior distributions give more insight than point estimates or CI.</p></li>
+<li><p>Crucial for scientific interpretation.</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="summary-why-we-prefer-bayesian-methods-in-astronomy">
+<h2>Summary: Why We Prefer Bayesian Methods in Astronomy<a class="headerlink" href="#summary-why-we-prefer-bayesian-methods-in-astronomy" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Reason</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>One-shot observations</p></td>
+<td><p>Bayesian works on the actual data, not hypothetical repeats</p></td>
+</tr>
+<tr class="row-odd"><td><p>Prior knowledge matters</p></td>
+<td><p>Encoded naturally and transparently</p></td>
+</tr>
+<tr class="row-even"><td><p>Complex, hierarchical models</p></td>
+<td><p>Straightforward with Bayesian approach</p></td>
+</tr>
+<tr class="row-odd"><td><p>Full uncertainty quantification</p></td>
+<td><p>Posterior gives rich information</p></td>
+</tr>
+<tr class="row-even"><td><p>Model comparison and selection</p></td>
+<td><p>Bayes factors penalize overfitting appropriately</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<table><tr>
+<td> <img src="images/frequentists_vs_bayesians.png" style="height:700px;"/> </td>
+<td> <img src="images/modified_bayes_theorem.png" style="height: 300px;"/> </td>
+</tr></table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "astrostat25"
+        },
+        kernelOptions: {
+            name: "astrostat25",
+            path: "./Bayesian"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'astrostat25'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Bayesian_1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Bayesian Statistics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../MCMC/MCMC.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1. Introduction</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bayesian Statistics — Applied</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-line">1. Fitting a line</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-from-an-unknown-distribution">1.1. The data from an unknown distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overplotting-two-potential-models-using-fiducial-parameters">1.2. Overplotting two potential models using fiducial parameters</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-prior-likelihood-and-posterior-assuming-gaussian-profile">1.3. Defining the prior, likelihood and posterior assuming Gaussian profile…</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maximizing-the-posterior">1.4. Maximizing the posterior</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repeating-using-a-cauchy-profile">1.5. Repeating using a Cauchy profile</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-models">2. Selecting models</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-ratio-prior-independent">2.1. Likelihood ratio (prior-independent)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-comparison-of-chi-2-values">Connection to comparison of <span class="math notranslate nohighlight">\(\chi^2\)</span> values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taking-into-account-the-flexibility-of-the-models">2.2. Taking into account the flexibility of the models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-akaike-information-criterion">The Akaike Information Criterion</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-is-a-penalty-term">k is a penalty term</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-information-criterion">The Bayesian Information Criterion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-factors">Bayesian Factors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-jeffreys-scale">The Jeffreys’ scale</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-compare-the-aics-bics">2.3. Let’s compare the AICs, BICs</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#helping-model-selection">3. Helping model selection</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-bayes-factor">4. Computing the Bayes Factor</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-bayesian-vs-frequentist">5. Discussion: Bayesian vs. Frequentist</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophical-foundations">5.1. <strong>Philosophical Foundations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors-the-core-divergence">5.2. <strong>Priors: The Core Divergence</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-results">5.3. <strong>Interpretation of Results</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-astronomy-prefers-bayesian-statistics">5.4. <strong>Why Astronomy Prefers Bayesian Statistics</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-why-we-prefer-bayesian-methods-in-astronomy">Summary: Why We Prefer Bayesian Methods in Astronomy</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
