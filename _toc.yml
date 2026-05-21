@@ -5,10 +5,11 @@ options:
   numbered: false
 
 chapters:
-  - file: Fitting_and_Optimization/Fitting_and_Optimization.ipynb
+  - file: Optimization/Optimization.ipynb
   - file: Bayesian/Bayesian_1.ipynb
   - file: Bayesian/Bayesian_2.ipynb  
   - file: MCMC/MCMC.ipynb  
   - file: Machine_Learning/Intro_and_Clustering.ipynb  
+  - file: Machine_Learning/Classification.ipynb  
   
 

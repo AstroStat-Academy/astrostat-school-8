@@ -8,7 +8,7 @@ html:
   static_path:
     - Template_Notebook/images
     - Template_Notebook/data
-    - Fitting_and_Optimization/images
+    - Optimization/images
     - Bayesian/images
     - Bayesian/data  
     - MCMC/images
@@ -18,7 +18,7 @@ html:
     
   
 repository:
-  url: https://github.com/AstroStat-Academy/astrostat-school-7\8
+  url: https://github.com/AstroStat-Academy/astrostat-school-8/
   path_to_book: .
   branch: main
 
