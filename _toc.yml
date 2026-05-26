@@ -10,6 +10,9 @@ chapters:
   - file: Bayesian/Bayesian_2.ipynb  
   - file: MCMC/MCMC.ipynb  
   - file: Machine_Learning/Intro_and_Clustering.ipynb  
-  - file: Machine_Learning/Classification.ipynb  
-  
+  - file: Machine_Learning/Classification.ipynb 
+  - file: Machine_Learning/ML_Practices.ipynb 
+  - file: Deep_Learning/Introduction.ipynb      
+  - file: Deep_Learning/Regression_workshop.ipynb
+  - file: Deep_Learning/CNN_workshop.ipynb    
 
