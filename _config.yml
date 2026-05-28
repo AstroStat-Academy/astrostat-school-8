@@ -15,6 +15,8 @@ html:
     - MCMC/data  
     - Machine_Learning/images
     - Machine_Learning/data 
+    - Deep_Learning/images
+    - Deep_Learning/data 
     
   
 repository:

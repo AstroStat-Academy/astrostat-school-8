@@ -19,3 +19,7 @@ Thumbs.db
 # Environment
 .env
 *.log
+
+# Logs
+**/lightning_logs/
+**/sbi-logs/
