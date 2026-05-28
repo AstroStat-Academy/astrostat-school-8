@@ -6,6 +6,10 @@ html:
   extra_css:
     - _static/custom.css
   static_path:
+    - Basic_Statistics/images
+    - Basic_Statistics/data
+    - Hypothesis_Testing/images
+    - Hypothesis_Testing/data
     - Template_Notebook/images
     - Template_Notebook/data
     - Optimization/images
