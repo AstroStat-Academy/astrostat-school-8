@@ -14,13 +14,13 @@ html:
     - Template_Notebook/data
     - Optimization/images
     - Bayesian/images
-    - Bayesian/data  
     - MCMC/images
     - MCMC/data  
     - Machine_Learning/images
     - Machine_Learning/data 
     - Deep_Learning/images
     - Deep_Learning/data 
+    - SBI/assets
     
   
 repository:

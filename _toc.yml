@@ -17,4 +17,6 @@ chapters:
   - file: Deep_Learning/Introduction.ipynb      
   - file: Deep_Learning/Regression_workshop.ipynb
   - file: Deep_Learning/CNN_workshop.ipynb    
+  - file: SBI/SBI_short.ipynb
+  - file: SBI/SBI_exercise.ipynb
 
