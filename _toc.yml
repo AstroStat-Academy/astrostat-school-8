@@ -11,6 +11,7 @@ chapters:
   - file: Bayesian/Bayesian_1.ipynb
   - file: Bayesian/Bayesian_2.ipynb  
   - file: MCMC/MCMC.ipynb  
+  - file: GPU_Parallelization/GPU_parallelization.ipynb
   - file: Machine_Learning/Intro_and_Clustering.ipynb  
   - file: Machine_Learning/Classification.ipynb 
   - file: Machine_Learning/ML_Practices.ipynb 
