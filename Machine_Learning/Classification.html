@@ -1,0 +1,1900 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Machine Learning: Classification &#8212; AstroStat School 2026 — New York</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Machine_Learning/Classification';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Machine Learning Practices and Protocols" href="ML_Practices.html" />
+    <link rel="prev" title="Introduction to Machine Learning and Clustering" href="Intro_and_Clustering.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — New York</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — New York
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Basic_Statistics/Basic_Statistics.html">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Hypothesis_Testing/Hypothesis_Testing.html">Classical Statistics: Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Optimization/Optimization.html">Basics of Optimization</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Setup</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Setup</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Setup</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GPU_Parallelization/GPU_parallelization.html">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Intro_and_Clustering.html">Introduction to Machine Learning and Clustering</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Machine Learning: Classification</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="ML_Practices.html">Machine Learning Practices and Protocols</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Deep_Learning/Introduction.html">Introduction to Deep Learning</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Deep_Learning/Regression_workshop.html">Regression with Deep Learning</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Deep_Learning/CNN_workshop.html">Convolutional Neural Networks</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_short.html">Simulation Based Inference</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_exercise.html">Simulation Based Inference: Exercises</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-8/blob/main/./Machine_Learning/Classification.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Machine_Learning/Classification.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Machine Learning: Classification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Machine Learning: Classification</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-classification">Types of Classification</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flavors">Flavors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sample-for-our-classification-example">The sample for our classification example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-examine-data">Load and examine data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-data-select-features">Visualize data - select features</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-support-vector-machine-svm-algorithm">The Support Vector Machine (SVM) algorithm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boundary-in-2d">The boundary (in 2D)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-loss-function-again">Minimizing the loss function - again !</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-remarks-on-svm">Final remarks on SVM</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#svm-in-practice">SVM in practice</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binary-problem">The binary problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-data-splitting-and-the-golden-rule">Introducing data splitting and the Golden rule</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation-metrics-a-mini-discussion">Model evaluation metrics - a mini discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multi-class-problem">The multi-class problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-into-train-and-test-sets-for-multi-class">Splitting into train and test sets for multi-class</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-random-forest-algorithm">The Random Forest algorithm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">Decision Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-what">Minimizing what?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-remarks-on-random-forest">Final remarks on Random Forest</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-in-practice">Random Forest in practice</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-algorithms-overview">Classification algorithms overview</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-steps-to-follow-when-building-a-classification-model">Recap: steps to follow when building a classification model</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="machine-learning-classification">
+<h1>Machine Learning: Classification<a class="headerlink" href="#machine-learning-classification" title="Link to this heading">#</a></h1>
+<p>In this session we focus on another important application for machine learning, the <strong>Classification</strong>. <br>
+We will provide a simple problem (with multiple <strong>intermediate tasks</strong>):</p>
+<ul class="simple">
+<li><p>to demonstrate basic <strong>visualization</strong> of the data</p></li>
+<li><p>to show the basic steps in an <strong>application</strong> of an algorith (<em>or two!</em>)</p></li>
+<li><p>to present the necessary performance <strong>metrics</strong></p></li>
+<li><p>to investigate differences in <strong>binary and multiclass</strong> approaches</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> The target is to have an practical application example of an algorith to <u>understand the approach</u> and (hopefully!) use it for your own research.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/colab/clone_and_cd_colab.py&quot;</span>
+<span class="n">colab</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">colab</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">style</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="types-of-classification">
+<h1>Types of Classification<a class="headerlink" href="#types-of-classification" title="Link to this heading">#</a></h1>
+<section id="flavors">
+<h2>Flavors<a class="headerlink" href="#flavors" title="Link to this heading">#</a></h2>
+<p>Classification can come in two major flavors, based on the type of intervention by the user:</p>
+<ul class="simple">
+<li><p><strong>Unsupervised</strong>: The classification is defined “unsupervised” when the user does not provide labels during the training process and the machine learns the definition of each class from the data. This is exactly the case of “Clustering” that we saw in the previous session.</p></li>
+</ul>
+<blockquote>
+<div><p><em>In practice, the machine learns to cluster objects with similar properties.</em></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Supervised</strong>: The classification is defined “supervised” when the user provides a label for each object in the training set. In this case, the idea is that we can train the model to associate the label with some given characteristics of the training data.</p></li>
+</ul>
+<blockquote>
+<div><p><em>In practice, the machine learns to find similarities between objects with the same label.</em></p>
+</div></blockquote>
+</section>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">#</a></h2>
+<p>Keep in mind that:</p>
+<ul class="simple">
+<li><p><strong>class</strong> or <strong>label</strong> are used interchangeably</p></li>
+<li><p><strong>samples</strong> (i.e. the items) can be of any arbitrary type (e.g. a string, an image, or numbers) - however, in astronomy we mainly refer to <strong>objects or sources</strong>, since samples correspond to their collections <br>(so… samples in ml terminology and objects/sources in astronomy!)</p></li>
+<li><p>the objects/samples are categorized based on their <strong>properties</strong> or <strong>features</strong> (the actual information that we pass to the machine, e.g. the pixel intensities in the case of an image).</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-sample-for-our-classification-example">
+<h1>The sample for our classification example<a class="headerlink" href="#the-sample-for-our-classification-example" title="Link to this heading">#</a></h1>
+<p>To properly classify a star we need a spectrum. However, this is time consuming and limited to one (single slit spectroscopy) or a few tens of sources (multi-object spectroscopy). On the contrary, imaging in various different filters can be done easily and for thousands of sources per image. Photometry at different wavelengths result in a very low-resolution “spectrum”.<br></p>
+<center><img src="images/Girardi2002-photometric_systems.gif"<br>
+The filter and detector transmission curves for a number of different systems, along with indicative spectra of Vega, the Sun, and a M5 giant. <br>
+(Fig 3. from <a href="https://ui.adsabs.harvard.edu/abs/2002A%26A...391..195G/abstract" target="_blank" rel="noopener noreferrer"> Girardi et al. (2002)</a>)</center>
+<p>In this example we are using a set of photometric measurements (from optical to mid-IR bands) for a sample of massive evolved stars in the Large Magellanic Cloud (based on these works: <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2009AJ....138.1003B/abstract">Bonanos et al. (2009) AJ, 138, 1003</a>, <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2012ApJ...749..177N/abstract">Neugent et al. (2012), ApJ, 749, 177</a>, and <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2018MNRAS.478.3138D/abstract">Davies, Crowther &amp; Beasor (2018), MNRAS, 478, 313</a>).<br></p>
+<center><img src="images/Massey2013-HRD.png\" width=600><br>
+ A slightly modified version of Fig. 1 from <a href="https://ui.adsabs.harvard.edu/abs/2013NewAR..57...14M/abstract" target="_blank" rel="noopener noreferrer"> Massey et al. (2013)</a>)</center>
+<p>Our aim is to use a method that will help us <strong>distinguish different classes</strong> of objects. For our purposes we will use OBA stars (main-sequense objects), OBAe (a subcategory of OBA stars with circumstellar disks and emission lines), Wolf-Rayet stars (hot evolved stars with strong stellar winds that actually strip their envelopes), Yellow and Red supergiants (evolved massive stars). For convenience we will use OBA, OBAe, WR, YSG, and RSG, respectively, as labels.</p>
+<p>★ A similar, but more elaborated, implementation is performed in <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2022A%26A...666A.122M/abstract">Maravelias et al. (2022), A&amp;A, 666, 122</a>.</p>
+<section id="load-and-examine-data">
+<h2>Load and examine data<a class="headerlink" href="#load-and-examine-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfile</span> <span class="o">=</span> <span class="s2">&quot;data/LMC_phot_data.csv&quot;</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dfile</span><span class="p">)</span>
+
+<span class="c1">#examine data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Let us see what we have:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The column names:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Let&#39;s print the spectral types only:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now explore the statistics per group (class) of sources.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_cls</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt; Unique classes:&quot;</span><span class="p">,</span> <span class="n">unique_cls</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt; SUMMARY of loaded data:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">sptype</span> <span class="ow">in</span> <span class="n">unique_cls</span><span class="p">:</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">sptype</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sptype</span><span class="si">:</span><span class="s2">-&lt;6s</span><span class="si">}</span><span class="s2">--&gt; </span><span class="si">{</span><span class="n">number</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> stars&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bands</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;e_&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">b</span><span class="p">][</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">reminder</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    A simple function to print all bands</span>
+<span class="sd">    and classes available.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Available bands to use: &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bands</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">25</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Available classes to use:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unique_cls</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">spt</span> <span class="ow">in</span> <span class="n">unique_cls</span><span class="p">:</span>
+    <span class="n">data_spt</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">spt</span><span class="p">]</span>
+    <span class="n">number_spt</span> <span class="o">=</span> <span class="n">data_spt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">#    print(spt, number_spt)</span>
+
+    <span class="n">row</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Class&#39;</span><span class="p">:</span> <span class="n">spt</span><span class="p">,</span>
+        <span class="s1">&#39;Total&#39;</span><span class="p">:</span> <span class="n">number_spt</span>
+    <span class="p">}</span>
+    
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bands</span><span class="p">:</span>
+        <span class="n">data_spt_bnd</span> <span class="o">=</span> <span class="n">data_spt</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+        <span class="n">number_nn</span> <span class="o">=</span> <span class="n">data_spt_bnd</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">fraction</span> <span class="o">=</span> <span class="n">number_nn</span><span class="o">/</span><span class="n">number_spt</span>
+        
+        <span class="n">row</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">fraction</span> <span class="o">*</span> <span class="mi">100</span>
+            
+<span class="c1">#        print(b, fraction)</span>
+        
+<span class="c1">#    print(row)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    
+<span class="n">phot_data_per</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Available photometry for: </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bands</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of stars per band (in %)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">phot_data_per</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Question</strong></font></p>
+<p>Check the table, what do you notice here ?</p>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p>Many sources come without measurements across all filters. This is a particular problem for algortihms that need values to work with.</p>
+<p>This problem of <b>”missing values”</b> is actually the norm than the exception. There are ways to tackle this, e.g. by taking the mean values of the corresponding filters or more elaborated techinques. Check <a href="https://scikit-learn.org/stable/modules/impute.html" target="_blank" rel="noopener noreferrer">sklearn’s imputation of missing values</a> for more.</p>
+</details>
+</div></section>
+<section id="visualize-data-select-features">
+<h2>Visualize data - select features<a class="headerlink" href="#visualize-data-select-features" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reminder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">selmags</span><span class="p">(</span> <span class="n">band1</span><span class="p">,</span> <span class="n">band2</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to select sources of a specific</span>
+<span class="sd">    spectral class (cls) and return the magnitudes</span>
+<span class="sd">    that correspond to bands 1 and 2.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="c1"># select all rows of the &quot;cls&quot; type</span>
+    <span class="n">data_cls</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]</span><span class="o">==</span><span class="bp">cls</span><span class="p">]</span>
+<span class="c1">#    print(band1, band2)</span>
+    <span class="n">mag1</span> <span class="o">=</span> <span class="n">data_cls</span><span class="p">[</span><span class="n">band1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">mag2</span> <span class="o">=</span> <span class="n">data_cls</span><span class="p">[</span><span class="n">band2</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    
+    <span class="k">return</span> <span class="n">mag1</span><span class="p">,</span> <span class="n">mag2</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plotmags</span><span class="p">(</span> <span class="n">selected_bnd</span><span class="p">,</span> <span class="n">selected_spt</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Function to plot magnitudes and colors </span>
+<span class="sd">    for sources corresponding to the selected classes.</span>
+<span class="sd">    NOTEs: </span>
+<span class="sd">        - selected_bnd: a list of four magnitudes</span>
+<span class="sd">        - selected_spt: a list of selected spectral types</span>
+<span class="sd">    </span>
+<span class="sd">    Output: two sets of plots.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">legend_fs</span> <span class="o">=</span> <span class="mi">16</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;- plot1:&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">selected_spt</span><span class="p">:</span> 
+        <span class="n">plt1</span> <span class="o">=</span> <span class="n">selmags</span><span class="p">(</span> <span class="n">selected_bnd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">selected_bnd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="p">)</span>
+        
+        <span class="c1"># calculate the number of sources to be plotted</span>
+        <span class="c1"># both arrays have nan values, and plot is smart enough to </span>
+        <span class="c1"># not plot those points.</span>
+        <span class="c1"># but we need to know what we are missing!</span>
+        <span class="n">mask1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">plt1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">plt1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">n_points_1_kept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">mask1</span><span class="p">)</span>  
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;-- </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">: excluding </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">plt1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="n">n_points_1_kept</span><span class="si">}</span><span class="s1"> out of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">plt1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s1"> sources (</span><span class="si">{</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">plt1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="n">n_points_1_kept</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">plt1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
+
+
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plt1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">plt1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">n_points_1_kept</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1">#&#39;-{band1_2}&#39;)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">legend_fs</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plt1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">plt1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">plt1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">n_points_1_kept</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">legend_fs</span><span class="p">)</span>
+
+
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;- plot2:&#39;</span><span class="p">)</span>        
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">selected_spt</span><span class="p">:</span>
+        <span class="n">plt2</span> <span class="o">=</span> <span class="n">selmags</span><span class="p">(</span> <span class="n">selected_bnd</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">selected_bnd</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">s</span><span class="p">)</span>
+
+        <span class="n">mask2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">plt2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">plt2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">n_points_2_kept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">mask2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;-- </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">: excluding </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">plt2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="n">n_points_2_kept</span><span class="si">}</span><span class="s1"> out of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">plt2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s1"> sources (</span><span class="si">{</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">plt2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="n">n_points_2_kept</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">plt2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plt2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">plt2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">n_points_2_kept</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1">#&#39;-{band2_2}&#39;)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>    
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">legend_fs</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plt2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">plt2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">plt2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">plt2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">selected_bnd</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">legend_fs</span><span class="p">)</span>
+
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Exercise 1:</strong></font></p>
+<p><strong>Objective:</strong> Data visualization and exploration - which features to pick ?</p>
+<p><strong>Task:</strong> Change the bands you use to plot the CMDs as well as the number of classes to consider, and try to answer:</p>
+<ol class="arabic simple">
+<li><p>What happens if you start increasing the number of classes to consider ?</p></li>
+<li><p>How the selection of bands (e.g. adding more bands) influence the numbr of objects to plot (or get rejected) ?</p></li>
+<li><p>Would you prefer to use  combinations with few or more objects ?</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotmags</span><span class="p">([</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span><span class="s1">&#39;K&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;WR&#39;</span><span class="p">,</span> <span class="s1">&#39;OBA&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<ol class="arabic simple">
+<li><p>The task becomes more difficult as classes start to overlap. Some combinations may prove better to separate some classes but there is not a single optimal one.</p></li>
+<li><p>In order to make the plots we need sources with measuremets in both bands. By enforcing this we actually exclude objects with missing data. That results in decreasing number of sources.</p></li>
+<li><p>In principle we would like to take advantage of all available sources. That give us a better sampling of their parameters’ space.
+If only few sources remain then we actually lose information.</p></li>
+</ol>
+<p>Hence, we would like to maximize the number of sources used. In problems with already small numbers (like in this example) this can be crucial.</p>
+</details>
+</div><p>A working combination:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotmags</span><span class="p">([</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span><span class="s1">&#39;[4.5]&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;RSG&#39;</span><span class="p">,</span> <span class="s1">&#39;OBA&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>What have we achieved so far?</strong></p>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p>To <i>examine our data</i> and <i>select which features</i> to use.</p>
+</div>    
+<p>Now is the time to <strong>select</strong> an algorithm.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-support-vector-machine-svm-algorithm">
+<h1>The Support Vector Machine (SVM) algorithm<a class="headerlink" href="#the-support-vector-machine-svm-algorithm" title="Link to this heading">#</a></h1>
+<section id="the-boundary-in-2d">
+<h2>The boundary (in 2D)<a class="headerlink" href="#the-boundary-in-2d" title="Link to this heading">#</a></h2>
+<p>Support vector machine (SVM) is a way of choosing a decision boundary between different classes.</p>
+<p>The classification boundary is provided by the line (in 2D) that is found in the middle of the two lines defined by the closest points of each class, which are called  <strong>support vectors</strong>. The <strong>margin</strong> is the distance between these two parallel lines. By maximizing this margin, the SVM achieves the best possible separation with the largest safety zone between classes.</p>
+<center>
+<table><tr>
+    <td width=400>
+        <img src="images/SVM_1.png">
+    </td>
+    <td width=400>
+        <img src="images/SVM_2.png">
+    </td>
+</tr></table>
+    Left: The dashed line separating two classes (red and green). Right: The closest points to the line from each class constitute the "tip" of the support vectors.
+</center>
+<p>The left panel of the figure above shows two different classes distributing in a scatter plot according to variable <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>. The right panel explains the origin of the name support vectors: the closest points <em>support</em> the (solid) lines equally distant from the decision (dashed) line.</p>
+<p>Infinite possible boundaries can separate the two classes. SVM algorithms find <strong>the one that maximizes the distance</strong> between the lines defined by the support vectors</p>
+</section>
+<section id="minimizing-the-loss-function-again">
+<h2>Minimizing the loss function - again !<a class="headerlink" href="#minimizing-the-loss-function-again" title="Link to this heading">#</a></h2>
+<p>The supported (solid) lines can be defined as:</p>
+<div class="math notranslate nohighlight">
+\[ w \cdot x + b = +1 \]</div>
+<div class="math notranslate nohighlight">
+\[ w \cdot x + b = -1 \]</div>
+<p>where x is the coordinate on the (x1, x2) plane, w is a 2<span class="math notranslate nohighlight">\(\times\)</span>1 matrix and b a scalar. It turns out that these lines are separated by a distance 2 / ||w||. Finding the <em>ideal classification boundary</em>, i.e. the one maximizing the distance, is therefore a problem of <strong>minimizing ||w||</strong></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned} min(Loss) = min(||w||) $$.\\And... this is what SVM algorithms do!\\&amp;#9733; For a complete mathematical formulation, consult the [Idiot’s guide to Support vector
+machines, by Robert Berwick]( http://web.mit.edu/6.034/wwwbob/svm-notes-long-08.pdf).\\## Separatable classes (or not)\\We cannot always assume that 2 classes are separable without &quot;contamination&quot;. That is why SVM algorithms includes a tunable parameter ($C$) which penalizes misclassifications.\\
+&lt;div style=&quot;text-align: center;&quot;&gt;
+&lt;img src=&quot;images/svm-parameter-c-example.png&quot; width=800&gt; 
+The effect of &lt;i&gt;C&lt;/i&gt; parameter in the misclassifications.&lt;br&gt;
+(Credit: &lt;a href=&quot;https://learnopencv.com/svm-using-scikit-learn-in-python/&quot;
+ target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;SVM: What makes it superior to the Maximal-Margin and Support Vector Classifiers?, by Shivam Sharma&lt;/a&gt;)
+    &lt;/img&gt;
+    &lt;/div&gt;
+    
+- Small $C$ &amp;#8594; wide margin &amp;#8594; allows more misclassification &lt;br&gt;
+- Large $C$ &amp;#8594; narrow margin &amp;#8594; allows less misclassification    \\The SVM finds the line that maximizes the margin, and indirectly minimizes the misclassifications. However, SVM is not designed to minimize the contamination _per se_.\\
+## Multiple classes\\The SVM method can be applied for multiple classes as well.\\&lt;center&gt;&lt;img src=&quot;images/svm_many_classes.png&quot; width=400&gt; 
+SVM applied to 3 different classes.&lt;br&gt;
+&lt;/center&gt;\\## Multiple dimensions\\In the case of a sample characterized by three parameters (X, Y, Z), the scatter plot vecomes a 3D plot. Then, the boundary between the classes is not a line but a plane. Because of the fact that the method can be extrapolated at N-dimensions, the boundary can be generilized as a *hyperplane*.\\&lt;img src=&quot;images/svm_3d.png&quot; width=400&gt;
+&lt;center&gt;
+    Support vector machine applied for 3D features and three classes.
+&lt;/center&gt;\\## Non-linear boundaries\\Sometimes, linear boundaries may not be optimal and a non-linear SVM should be used instead. The left panel of the figure above shows an 2D scatter plot of two different classes (e.g. red and green stars with different radii and temperatures) which cannot be linearly separated.\\In order to find non-linear boundaries we can tackle the problem in an higher dimensional space. We use a process called **kernelization**, which consists in using a kernel function to attribute to our data a value in the additional dimension. Then, we draw the decision hyperplane into this higher dimensional space.\\The central panel of the figure shows that once the 2D data are mapped to a 3D space by attributing a $z$ value through a Gaussian-like function, the classes are easily separable by a 3D hyperplane. Projecting back the plane in 2D, we obtain the non-linear boundary (right panel).\\&lt;img src=&quot;images/kernel.png&quot; width=800&gt;
+&lt;center&gt;
+    When no linear boundaries can be used the SVM method can be applied by using kernel.
+&lt;/center&gt;\\## Choosing the kernel function\\Useful kernel functions [shall satisfy specific conditions](https://en.wikipedia.org/wiki/Kernel_method), so that in practice only a few are used. In the previous example, the Gaussian Radial Basis Function is used:\\$$K(x,y) = e^{-\gamma(x-y)^2}\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma\)</span> is a hyperparameter which shall be learned (in our example we use an arbitrary value but in principle we should use cross-validation methods).</p>
+</section>
+<section id="final-remarks-on-svm">
+<h2>Final remarks on SVM<a class="headerlink" href="#final-remarks-on-svm" title="Link to this heading">#</a></h2>
+<p><strong>Pros</strong></p>
+<ul class="simple">
+<li><p>Good at dealing with high dimensional data</p></li>
+<li><p>Works well on small data sets</p></li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul class="simple">
+<li><p>Picking the right kernel and parameters can be computationally intensive</p></li>
+<li><p>It suffers from contamination</p></li>
+</ul>
+<p>★ For further information on SVM, consult <a class="reference external" href="http://www.saedsayad.com/support_vector_machine.htm">Support Vector Machine - Classification, by Saed Sayad</a>.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="svm-in-practice">
+<h1>SVM in practice<a class="headerlink" href="#svm-in-practice" title="Link to this heading">#</a></h1>
+<section id="the-binary-problem">
+<h2>The binary problem<a class="headerlink" href="#the-binary-problem" title="Link to this heading">#</a></h2>
+<p>In this case we examine a binary classification problem where we select one class (or more that will group into a single one) and the rest classes as contaminants. The purpose is to check if we can separate efficiently these two classes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">process_data</span><span class="p">(</span> <span class="n">bands2use</span><span class="p">,</span> <span class="n">binary_classes2use</span>  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Process input data to return arrays </span>
+<span class="sd">    of magnitudes and (consecutive) colors</span>
+<span class="sd">    based on the input bands (band2use).</span>
+
+<span class="sd">    Option to prepare data for binary classification</span>
+<span class="sd">    if binary_classes2use contains classes or not.</span>
+<span class="sd">    </span>
+<span class="sd">    Selected objects are assigned 1, while the contaminants 0.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">data_diff</span> <span class="o">=</span> <span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="n">bands2use</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>   
+    <span class="n">data_diff</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bands2use</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bands2use</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
+    <span class="n">diff_columns</span> <span class="o">=</span> <span class="n">data_diff</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span>
+<span class="c1">#    print(data_diff)</span>
+<span class="c1">#    print(data_diff.columns.values)</span>
+
+    <span class="n">working</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">bands2use</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]],</span> <span class="n">data_diff</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">#    print(working)</span>
+    
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">binary_classes2use</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">working</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">working</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">binary_classes2use</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">working</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">working</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]</span>
+        
+    <span class="c1"># remove all nan rows</span>
+    <span class="n">working_clean</span> <span class="o">=</span> <span class="n">working</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;# stars with mags in:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+          <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">bb</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">bb</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">bands2use</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span>
+         <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=========================&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type    initial    final &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------&quot;</span><span class="p">)</span>
+       
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">unique_cls</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">&lt;4</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="p">(</span><span class="n">working</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">&gt;9</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">working_clean</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">24</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;TOTAL:  </span><span class="si">{</span><span class="n">working</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">&gt;7</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">working_clean</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">&gt;7</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">binary_classes2use</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">24</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;classifying:  </span><span class="si">{</span><span class="p">(</span><span class="n">working_clean</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s1">&gt;10</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;contaminants: </span><span class="si">{</span><span class="p">(</span><span class="n">working_clean</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s1">&gt;10</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+        
+        <span class="n">data_labels</span> <span class="o">=</span> <span class="n">working_clean</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">data_labels</span> <span class="o">=</span> <span class="n">working_clean</span><span class="p">[</span><span class="s1">&#39;SpT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    
+<span class="c1">#    print(working_clean[diff_columns])</span>
+    
+    <span class="n">data_mags</span> <span class="o">=</span> <span class="n">working_clean</span><span class="p">[</span><span class="n">bands2use</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">data_clrs</span> <span class="o">=</span> <span class="n">working_clean</span><span class="p">[</span><span class="n">diff_columns</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> 
+    <span class="n">data_objects</span> <span class="o">=</span> <span class="n">working_clean</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+          
+    <span class="k">return</span> <span class="n">data_mags</span><span class="p">,</span> <span class="n">data_clrs</span><span class="p">,</span> <span class="n">data_objects</span><span class="p">,</span> <span class="n">data_labels</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reminder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Select here the class(es) you would like to distinguish from the rest, along with the bands to use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class2keep</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;RSG&#39;</span><span class="p">]</span>
+<span class="c1"># Select the bands you want to use here:</span>
+<span class="n">bands_selected</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="s1">&#39;[4.5]&#39;</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ml_data_mags</span><span class="p">,</span> <span class="n">ml_data_clrs</span><span class="p">,</span> <span class="n">ml_objects</span><span class="p">,</span> <span class="n">ml_labels</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span> <span class="n">bands_selected</span><span class="p">,</span> <span class="n">class2keep</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>NOTE</em>: the process_data() function examines and keeps only the sources with values across all bands. In other words, we remove sources with missing values (according to the bands selected).</p>
+<p>Let’s print the labels to see how they look like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ml_labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>NOTE</em>: If you have more than 2 bands selected the following plot will use the first two. Modify accordingly to plot other combinations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="n">conts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">ml_labels</span><span class="o">==</span><span class="mi">0</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">clasf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">ml_labels</span><span class="o">!=</span><span class="mi">0</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">ml_data_mags</span><span class="p">[</span><span class="n">conts</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">ml_data_mags</span><span class="p">[</span><span class="n">conts</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> 
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Contaminants&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">ml_data_mags</span><span class="p">[</span><span class="n">clasf</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">ml_data_mags</span><span class="p">[</span><span class="n">clasf</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> 
+             <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Selected (</span><span class="si">{</span><span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">class2keep</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bands_selected</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1">#&#39;-{bands_selected[1]}&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">bands_selected</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="introducing-data-splitting-and-the-golden-rule">
+<h2>Introducing data splitting and the Golden rule<a class="headerlink" href="#introducing-data-splitting-and-the-golden-rule" title="Link to this heading">#</a></h2>
+<p>In supervised approaches we want to “teach” the algorithms what they need to learn, before start the predictions. In this case we want the SVM to identify the common properties of the two sub groups (1 including all possible classes used, and 0 as contaminants). However, if we provide all data the algorithm will learn this “by heart” and fit them perfectly (called <strong>overfitting</strong>), and when new data appear will probably misclassify.</p>
+<p>So, what can we do ? We have to <strong>split the data</strong> and follow the <strong>Golden rule</strong>.</p>
+<table><tr>
+    <td width=640>
+        <img src="images/Train_Validation_Test.png">
+        <center>
+            <br>
+            Indicative recipe for splitting a dataset into the analysis sets.<br>
+            For very large datasets (above 10$^5$ entries), the percentages of validation and test can be substantially smaller.
+            <br>
+        </center>
+    </td>
+</tr></table>
+<p>What are the different sets for?</p>
+<ul class="simple">
+<li><p><strong>Train</strong> set <span class="math notranslate nohighlight">\(~~~~~~\rightarrow\)</span> <strong>Learn</strong> the model parameters</p></li>
+<li><p><strong>Validation</strong> set <span class="math notranslate nohighlight">\(\rightarrow\)</span> Check that the learnt model is not <strong>overfitting/underfitting</strong> the train set</p></li>
+<li><p><strong>Test</strong> set <span class="math notranslate nohighlight">\(~~~~~~~\rightarrow\)</span> <strong>Assess</strong> the model performance</p></li>
+</ul>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p>The <b>Golden Rule of Machine Learning<b></p>
+<p>Treat the <i>test</i> data as if they come from the <i>future</i></p>
+</div><p>So let’s go on and split our data now.</p>
+<p><em>NOTE</em>: We will only use the train/test split as our purpose now is not to optimize the model (you will see more on that in <strong>ML Basic Practices</strong>).</p>
+<p><em>NOTE</em>: You can either use magnitudes (ml_data_mags) or color indeces (ml_data_clrs).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">ml_data_mags</span><span class="p">,</span> <span class="n">ml_labels</span><span class="p">,</span> 
+                        <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1">#, random_state=42) </span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- From </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ml_objects</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> (training)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> (test)&#39;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test labels: </span><span class="si">{</span><span class="n">y_test</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Questions</strong></font></p>
+<ol class="arabic simple">
+<li><p>What happens when you repeat the process?</p></li>
+<li><p>How can we solve this?</p></li>
+<li><p>Where does 42 comes from?</p></li>
+</ol>
+<br>
+    <i>HINTS:</i> 
+<ul>
+    <li> Use Ctrl+Enter to run a cell without continuing to the next one
+    <li> Check the online documentation (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html" target="_blank" rel="noopener noreferrer">train-test_split</a>)
+    </ul>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<ol class="arabic simple">
+<li><p>The process is random so every time different objects are selected as train to test.</p></li>
+<li><p>We can use <code>random_state</code> to have the same split all the time (this is mainly for developing and debugging pusposes, as it helps to reproduce the results).</p></li>
+<li><p>Whaat? You do not know?<br></p></li>
+</ol>
+<ul>
+    <li> shame on you!
+    <li> look it up (many ways to do it nowadays!)
+    </ul>
+</details>
+</div><p>Now, let’s use the classifier to fit our training set (X_train) and predict the classes of the test samples (X_test). We will print some metrics to check the performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">metrics</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="c1"># 1.0 is the default value, must be positive </span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="c1">#print(yhat)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classification report:</span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">yhat</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Confusion matrix: </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">yhat</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>but</strong>… <em>aaarg, what are all these metrics about ?</em></p>
+</section>
+<section id="model-evaluation-metrics-a-mini-discussion">
+<h2>Model evaluation metrics - a mini discussion<a class="headerlink" href="#model-evaluation-metrics-a-mini-discussion" title="Link to this heading">#</a></h2>
+<p>There is a number of assessment metrics for the performance of a classifier. We start by introducing the idea of the <strong>confusion matrix</strong>.</p>
+<center><img src="images/evidentlyai-confusion_matrix.png" width=600> 
+Confusion matrix for classification.<br>
+(Credit: <a href="https://www.evidentlyai.com/classification-metrics/confusion-matrix"  target="_blank" rel="noopener noreferrer">from EvidentlyAI.com</a>)</center>
+<p><strong>Defining some metrics:</strong></p>
+<ul class="simple">
+<li><p>Precision, the number of correct predictions:
+$<span class="math notranslate nohighlight">\( \rm{Precision} =  \frac{\rm{True~Positives}}{\rm{Actual~Results}} = \frac{\rm{True~ Positives}}{\rm{True~Positives\,+\,False~Positives}} \)</span>$ <br></p></li>
+<li><p>Recall, the number of real samples that are correctly predicted:
+$<span class="math notranslate nohighlight">\( \rm{Recall} = \frac{\rm{True~Positives}}{\rm{Predicted~Results}} = \frac{\rm{True~ Positives}}{\rm{True~Positives + False~Negatives}} \)</span>$ <br></p></li>
+<li><p>F1-score, the harmonic mean of precisions and recall (for balance):
+$<span class="math notranslate nohighlight">\( \rm{F1-score} = 2 \times \frac{\rm{Precision}\times\rm{Recall}}{\rm{Precision}+\rm{Recall}}\)</span>$ <br></p></li>
+<li><p>Accuracy, the fraction of the total correct predictions over the total sample:
+$<span class="math notranslate nohighlight">\( \rm{Accuracy} = \frac{\rm{True~Positives}\,+\,\rm{True~Negatives}}{\rm{Total}} \)</span>$ <br></p></li>
+<li><p>Macro averaging, the mean for any metric and category, providing the same weight for all categories (indepedant of their sample).<br><br></p></li>
+<li><p>Weighted averaging: the mean of all metrics by considering the number of samples per class (i.e. it gives higher weights to the classes with larger samples).<br><br></p></li>
+<li><p>Support: the number of samples per class on the test set.<br></p></li>
+</ul>
+<hr class="docutils" />
+<p><em>Note 1</em>: You may also encounter the terms <em>sensitivity</em> and <em>specificity</em> which corresponds to the recall of the positive and the negative class, respectively, in binary problems.</p>
+<p><em>Note 2</em>: In astrophysics we use the terms <em>completeness</em> and <em>contamination</em> (see <a class="reference external" href="http://connolly.github.io/introAstroML/blog/classification.html">Classification, by Andy Connolly</a>):</p>
+<div class="math notranslate nohighlight">
+\[ \rm{completeness} = \frac{\rm{True~Positives}}{\rm{All~real~Positives}} = \frac{True~Positives}{True~Positives + False~Negatives} = recall\]</div>
+<div class="math notranslate nohighlight">
+\[ \rm{contamination} = \frac{False~Positives}{All~detected~Positives} = \frac{False~Positives}{True~Positives + False~Positives}\]</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Question</strong></font></p>
+<p>What <strong>metric of performance</strong> shall we maximize, to optimize our model parameters?<br>
+It depends on the <strong>objective of the model</strong>.<br />
+<br></p>
+<p>Example 1: We want to identify best follow-up candidates of GW sources, without wasting precious time on wrong targets</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>TP: identified as GW, and it is GW
+FP: identified as GW, but not GW
+TN: not identified as GW, and not GW
+FN: not identified as GW, but is GW
+</pre></div>
+</div>
+</div>    <div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p>Observing GW candidates means that no time should be spent on FP, so we need to minimize this and <b>maximize Precision</b>.</p>
+</details>
+</div><div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p>Example 2: We want to create a catalog of OB stars, so we would like to retrieve the whole population</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>TP: identified as OB, and it is OB
+FP: identified as OB, but not OB
+TN: not identified as OB, and not ON
+FN: not identified as OB, but is OB
+</pre></div>
+</div>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p>We would like to be complete on the catalog, so we should not miss any of the OB population (even at the expense of some FP). Therefore, we need to minimize FN, and <b>maximize Recall</b>.</p>
+</details>
+</div><p>An interesting presentation of this topic can be found <a class="reference external" href="https://towardsdatascience.com/precision-and-recall-a-comprehensive-guide-with-practical-examples-71d614e3fc43">here</a>.</p>
+<hr class="docutils" />
+<p>And now let’s go on with our example… plotting a prettier presentation of the previous confusion matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_confusion_matrix</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span>
+                          <span class="n">target_names</span><span class="p">,</span>
+                          <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Confusion matrix&#39;</span><span class="p">,</span>
+                          <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    given a sklearn confusion matrix (cm), make a nice plot</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    cm:           confusion matrix from sklearn.metrics.confusion_matrix</span>
+
+<span class="sd">    target_names: given classification classes such as [0, 1, 2]</span>
+<span class="sd">                  the class names, for example: [&#39;high&#39;, &#39;medium&#39;, &#39;low&#39;]</span>
+
+<span class="sd">    title:        the text to display at the top of the matrix</span>
+
+<span class="sd">    cmap:         the gradient of the values displayed from matplotlib.pyplot.cm</span>
+<span class="sd">                  see http://matplotlib.org/examples/color/colormaps_reference.html</span>
+<span class="sd">                  plt.get_cmap(&#39;jet&#39;) or plt.cm.Blues</span>
+
+<span class="sd">    normalize:    If False, plot the raw numbers</span>
+<span class="sd">                  If True, plot the proportions</span>
+<span class="sd">                  </span>
+<span class="sd">                  </span>
+<span class="sd">    Usage</span>
+<span class="sd">    -----</span>
+<span class="sd">    plot_confusion_matrix(cm           = cm,                  # confusion matrix created by</span>
+<span class="sd">                                                              # sklearn.metrics.confusion_matrix</span>
+<span class="sd">                          normalize    = True,                # show proportions</span>
+<span class="sd">                          target_names = y_labels_vals,       # list of names of the classes</span>
+<span class="sd">                          title        = best_estimator_name) # title of graph</span>
+
+<span class="sd">    Citation</span>
+<span class="sd">    ---------</span>
+<span class="sd">    http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cm</span><span class="p">))</span>
+    <span class="n">misclass</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">accuracy</span>
+
+    <span class="k">if</span> <span class="n">cmap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1">#    plt.title(title)</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;# sources&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span> <span class="c1"># (fontsize=15)</span>
+   
+
+    <span class="k">if</span> <span class="n">target_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tick_marks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target_names</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">tick_marks</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">tick_marks</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+        <span class="n">cm</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">cm</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+
+    <span class="n">thresh</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1.5</span> <span class="k">if</span> <span class="n">normalize</span> <span class="k">else</span> <span class="n">cm</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{:0.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]),</span>
+                     <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span> <span class="p">)</span>
+                     <span class="c1">#color=&quot;white&quot; if cm[i, j] &gt; thresh else &quot;black&quot;)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{:,}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]),</span>
+                     <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span> 
+<span class="c1">#                     color=&quot;white&quot; if cm[i, j] &gt; thresh else &quot;black&quot;)</span>
+
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True label&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted label (accuracy=</span><span class="si">{:0.2f}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accuracy</span><span class="p">,</span> <span class="n">misclass</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_confusion_matrix</span><span class="p">(</span> <span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">yhat</span><span class="p">),</span>
+                      <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Confusion matrix&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;BuPu&#39;</span><span class="p">,</span> <span class="c1"># for more options see: https://matplotlib.org/stable/tutorials/colors/colormaps.html</span>
+                      <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># True returns fraction, False raw numbers</span>
+                      <span class="p">)</span> <span class="c1"># YlOrBr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Exercise 2:</strong></font></p>
+<p><strong>Objective:</strong> Explore the effect of classification results by changing some input parameters.</p>
+<p><strong>Task:</strong> Go back to the previous cells (or if you want make new ones and copy the code from above) so that you experiment with the code.
+What happens if we start adding more classes into the selected one ?</p>
+<p><strong>Optional task:</strong> What happens when we start changing the <span class="math notranslate nohighlight">\(C\)</span> parameter?</p>
+<p><em>HINT:</em> the default value is 1, so start increasing/decreasing from this value.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reminder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># enter code here if you want</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># select classes and bands</span>
+<span class="n">class2keep</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;RSG&#39;</span><span class="p">,</span> <span class="s1">&#39;WR&#39;</span><span class="p">]</span>
+<span class="n">bands_selected</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="s1">&#39;[4.5]&#39;</span><span class="p">]</span> 
+
+<span class="c1"># process data, pick either mag or clrs</span>
+<span class="n">ml_data_mags</span><span class="p">,</span> <span class="n">ml_data_clrs</span><span class="p">,</span> <span class="n">ml_objects</span><span class="p">,</span> <span class="n">ml_labels</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span> <span class="n">bands_selected</span><span class="p">,</span> <span class="n">class2keep</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">()</span> 
+
+<span class="c1"># split data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">ml_data_mags</span><span class="p">,</span> 
+                                                    <span class="n">ml_labels</span><span class="p">,</span> 
+                        <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1">#, random_state=42) </span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- From </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ml_objects</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> (training)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> (test)&#39;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">()</span>
+<span class="c1">#print(f&#39;Test labels: {y_test}&#39;)</span>
+
+<span class="c1"># initiate the model, change parameter C</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span> 
+<span class="c1"># fit and predict</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># plot the confusion matrix</span>
+<span class="n">plot_confusion_matrix</span><span class="p">(</span> <span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">yhat</span><span class="p">),</span>
+                      <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Confusion matrix&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;BuPu&#39;</span><span class="p">,</span> <span class="c1"># for more options see: https://matplotlib.org/stable/tutorials/colors/colormaps.html</span>
+                      <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># True returns fraction, False raw numbers</span>
+                      <span class="p">)</span> <span class="c1"># YlOrBr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<ol class="arabic simple">
+<li><p>The accuracy drops as more classes results in a more complex problem and the classes may overlap in the feature space (confusing the classifier even more!).</p></li>
+<li><p>A lower value off C allows for more misclassifications, i.e. more sources are found away from the diagonal in the confusion matrix. As we increase C, the sources start gathering around the diagonal, but we will lose in predictive power in new data.</p></li>
+</ol>
+</details>
+</div></section>
+<section id="the-multi-class-problem">
+<h2>The multi-class problem<a class="headerlink" href="#the-multi-class-problem" title="Link to this heading">#</a></h2>
+<p>Now we approach the same problem as a multi-class one, i.e. we are using the SVM as a classifier that can handle all classes simultaneously.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reminder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class2keep</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># that means all classes</span>
+<span class="n">bands_selected</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="s1">&#39;[4.5]&#39;</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>NOTE: in this case the list for the classes should be empty ([]) to include all classes.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ml_data_mags</span><span class="p">,</span> <span class="n">ml_data_clrs</span><span class="p">,</span> <span class="n">ml_objects</span><span class="p">,</span> <span class="n">ml_labels</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span> <span class="n">bands_selected</span><span class="p">,</span> <span class="n">class2keep</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now if we print the labels again, we notice that the array is totally different and the multiclass output is evident.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ml_labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="splitting-into-train-and-test-sets-for-multi-class">
+<h2>Splitting into train and test sets for multi-class<a class="headerlink" href="#splitting-into-train-and-test-sets-for-multi-class" title="Link to this heading">#</a></h2>
+<p>We are using again the train-test split approach but considering all classes now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ml_labels</span><span class="p">))</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">ml_data_mags</span><span class="p">,</span> <span class="n">ml_labels</span><span class="p">,</span>
+                                <span class="c1"># .... , .... , </span>
+                                <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1">#, random_state=42) </span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&gt; From </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ml_objects</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources we use </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> for training and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> for testing.&#39;</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Statistics per class:&#39;</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unique_cls</span><span class="p">:</span>
+    <span class="n">items_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">y_train</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">items_test</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">y_test</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">items_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">ml_labels</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&gt; For </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1"> there are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_total</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources split in </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> (train) and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> (test) samples&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Questions</strong></font></p>
+<ol class="arabic simple">
+<li><p>Run train-test split a few times as it is  - do you notice anything strange?</p></li>
+</ol>
+<p><em>HINT:</em> try to reduce the test_size, to become more evident.</p>
+<ol class="arabic simple" start="2">
+<li><p>How can we correct for the effect in the previous question?</p></li>
+</ol>
+<p><em>HINT:</em> Check the documentation (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html" target="_blank" rel="noopener noreferrer">train-test_split</a>) and find out which parameters help.</p>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<ol class="arabic simple">
+<li><p>It is possible to get 0 test objects for some classes. This is due to the randomness of the selection and the low number of sources in some of the classes.</p></li>
+<li><p>Add shuffle=True and stratify ensures that the test sample will keep the demographics of the original one.</p></li>
+</ol>
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ml_labels</span><span class="p">))</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">ml_data_mags</span><span class="p">,</span> <span class="n">ml_labels</span><span class="p">,</span>
+                                <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">ml_labels</span><span class="p">,</span> 
+                                <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1">#, random_state=42) </span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&gt; From </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ml_objects</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources we use </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> for training and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> for testing.&#39;</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Statistics per class:&#39;</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unique_cls</span><span class="p">:</span>
+    <span class="n">items_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">y_train</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">items_test</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">y_test</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">items_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">ml_labels</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&gt; For </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1"> there are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_total</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources split in </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> (train) and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> (test) samples&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p><b>Important take-away message #1</b></p>
+<p>sklearn <i>documentation</i> is your friend.</p>
+</div><p>Let’s produce some results now…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf2</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span> 
+<span class="n">clf2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">clf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="c1">#print(yhat)</span>
+
+<span class="c1">#confmatrix = metrics.confusion_matrix( y_test, yhat)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classification report:</span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">yhat</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Confusion matrix: </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">yhat</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plot_confusion_matrix</span><span class="p">(</span> <span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">yhat</span><span class="p">),</span>
+                      <span class="n">unique_cls</span><span class="p">,</span>
+                      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Confusion matrix&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;BuPu&#39;</span><span class="p">,</span> <span class="c1"># for more options see: https://matplotlib.org/stable/tutorials/colors/colormaps.html</span>
+                      <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># True returns precent, False raw numbers</span>
+                      <span class="p">)</span> <span class="c1"># YlOrBr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Questions</strong></font></p>
+<ol class="arabic simple">
+<li><p>How does the result changes with respect to the binary case?</p></li>
+<li><p>How does the result change with kernel ?</p></li>
+</ol>
+<p><em>HINT:</em> check sklearn.svm.SVC</p>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<ol class="arabic simple">
+<li><p>We see a drop in the accuracy, because we try to classify more classes which are actually not easilly separated in the feature space. In other words, some classes may have similar magnitudes and colors, which makes it difficult to separate them.</p></li>
+<li><p>Adding more classes (and bands) increases the dimensionality of the problem, therefore, there is a more complex representation of the input data. Kernels help to fit them more efficiently since they are able to “see” in more dimensions.</p></li>
+</ol>
+</details>
+</div><div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p><b>Important take-away message #2</b></p>
+<p>Accuracy is <i>not</i> the best metric to use when we have imbalanced datasets.</p>
+</div></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-random-forest-algorithm">
+<h1>The Random Forest algorithm<a class="headerlink" href="#the-random-forest-algorithm" title="Link to this heading">#</a></h1>
+<section id="decision-tree">
+<h2>Decision Tree<a class="headerlink" href="#decision-tree" title="Link to this heading">#</a></h2>
+<p>A <strong>Decision Tree</strong> (<strong>DT</strong>) is simply a top-to-bottom tree-like structure where each node corresponds to a question (or a set of features more generally) that distinguishes objects to two groups, left and right from the node. A decision tree presents the drawback of learning extremely well the training set. That means that DTs overfit the data and they cannot predict very accurately new data.</p>
+<center><img src="images/DecisionTree.jpg/" width=400> 
+Quick introduction to Decision Trees - how to fulfill an everyday need.<br>
+(Credit: G. Maravelias)</center>
+<section id="minimizing-what">
+<h3>Minimizing what?<a class="headerlink" href="#minimizing-what" title="Link to this heading">#</a></h3>
+<p>To find the optimal way to partition objects, the algorithm needs a metric to quantify this process. One such metric is the Gini impurity, which calculates the probability of an object being incorrectly classified (or assigned to the wrong class) when chosen randomly. It is defined by the formula</p>
+<div class="math notranslate nohighlight">
+\[ Gini = 1 - \sum\limits_{i=1}^{n} (p_i)^2 \]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of classes, and <span class="math notranslate nohighlight">\(p_i\)</span> is the probability of an object belonging to a specific class for a given value of the variable (feature) under consideration. These probabilities are summed across all values of the feature and all corresponding classes.</p>
+<p>The Gini impurity for a node is determined by the average of these values across all classes, weighted by their frequency (<a class="reference external" href="https://blog.quantinsti.com/gini-index/">for a detailed presentation</a>).</p>
+<p>If all objects in a set belong to the same class, the Gini impurity is 0. If it is 1, the class assignments of the objects are random.</p>
+</section>
+</section>
+<section id="random-forest">
+<h2>Random Forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h2>
+<p><strong>Random Forest</strong> (<strong>RF</strong>) or Random Decision Trees (<a class="reference external" href="https://doi.org/10.1023/A:1010933404324">Breiman (2001), Machine Learning, 45, 5</a>) is a generalization of the DTs, as it utilises a multitude of decision trees. When RF are used as a classification method, for each input datum the final output is the class (/value) given by the mode of the classes of the individual trees.</p>
+<center><img src="images/RandomForest.jpg" width=800> 
+Schematic description of the Random Forest classifier.<br>
+(Credit: G. Maravelias)</center>
+<p>RF creates a large number of DTs through random selection of a subset of the training set as well as a random selection of features. This randomness reduces the correlation between the different DTs. Since the DTs have different conditions in their nodes and different overall structures, this diversity yield overall robust predictions.</p>
+<p>Once the RF has been trained, the data of an <strong>unlabeled</strong> source (to be classified) are  fed into all DTs of the forest. According to its properties and the nodes in each DT, it follows a specific path which leads to a given class. The final output of the RF (the prediction) is an aggregation of all DTs by means of a majority vote.</p>
+<p>The fact that RF combines the prediction for a number of individual trees makes it an <strong>ensemble</strong> method.</p>
+<p>★ <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2019ascl.soft03009R/abstract">Reis, Baron, &amp; Shahaf (2019), AJ, 157, 16</a> provide an excellent description of RFs (for a two-class problem) and present a  probabilistic RF method which takes into account the uncertainties on the data and their labels.</p>
+</section>
+<section id="final-remarks-on-random-forest">
+<h2>Final remarks on Random Forest<a class="headerlink" href="#final-remarks-on-random-forest" title="Link to this heading">#</a></h2>
+<p>In machine learning most of the effort is actually spent on the <strong>sample</strong> selection and, most importantly, on the selection of the <strong>features</strong> used for the classification (feature engineering).</p>
+<p>RF partially overcome the latter problem by training each DT on a different sub-set of features, hence training the algorithm to recognize the features which mostly differentiate the objects.</p>
+<p><strong>PROS</strong></p>
+<ul class="simple">
+<li><p>No need of scaling or transformation of the initial data.</p></li>
+<li><p>Implicit feature selection.</p></li>
+<li><p>Suitable for large datasets with many features.</p></li>
+</ul>
+<p><strong>CONS</strong></p>
+<ul class="simple">
+<li><p>Not easily interpretable.</p></li>
+<li><p>Hyperparameter needs good tuning for high accuracy.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="random-forest-in-practice">
+<h1>Random Forest in practice<a class="headerlink" href="#random-forest-in-practice" title="Link to this heading">#</a></h1>
+<p>For the implementation, we will use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html"><code class="docutils literal notranslate"><span class="pre">sklearn.RandomForestClassifier</span></code></a>, whose basic parameter (among others) is <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code>, i.e. the number of trees (default 100).</p>
+<p>Using the same dataset we are now approaching the same problem using the Random Forest (both as a binary and a multiclass classifier).</p>
+<hr class="docutils" />
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Exercise 3:</strong></font></p>
+<p><strong>Objective:</strong> Apply the Random Forest classifier to our dataset.</p>
+<p><strong>Task:</strong> Follow the actions below to get to some results:</p>
+<ol class="arabic simple">
+<li><p>Complete the train-test split and select magnitudes to work with.</p></li>
+<li><p>Find the proper function for RF and make predictions.</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reminder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Note:</em> Add any class if you want to use RF as binary classifier, or keep the list <code class="docutils literal notranslate"><span class="pre">class2keep_RF</span></code> empty for all classes. Add any number of bands to use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class2keep_RF</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">bands_selected_RF</span> <span class="o">=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span>  
+<span class="n">ml_data_mags</span><span class="p">,</span> <span class="n">ml_data_clrs</span><span class="p">,</span> <span class="n">ml_objects</span><span class="p">,</span> <span class="n">ml_labels</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span> <span class="n">bands_selected_RF</span><span class="p">,</span> <span class="n">class2keep_RF</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># splitting data on magnitudes or colors</span>
+
+<span class="c1">#X_train, X_test, y_train, y_test = train_test_split(ml_data_mags, </span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> 
+                                                    <span class="o">...</span><span class="p">,</span>
+                                <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=...</span><span class="p">,</span> 
+                                <span class="n">test_size</span><span class="o">=...</span><span class="p">)</span> <span class="c1">#,  random_state=42) </span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&gt; From </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ml_objects</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources we use </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> for training and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> for testing.&#39;</span><span class="p">)</span> 
+
+<span class="c1"># check if in binary or multi-label mode</span>
+<span class="k">if</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">ml_labels</span><span class="p">:</span> <span class="c1"># binary</span>
+    <span class="n">confmat_classes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">confmat_classes</span> <span class="o">=</span> <span class="n">unique_cls</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Statistics per class:&#39;</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unique_cls</span><span class="p">:</span>
+        <span class="n">items_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">y_train</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">items_test</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">y_test</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">items_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">ml_labels</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&gt; For </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1"> there are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_total</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources split in </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> (train) and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> (test) samples&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="n">clfrf</span> <span class="o">=</span> <span class="o">...</span>
+<span class="c1"># code to fit and predict here (follow SVM structure)</span>
+<span class="o">...</span>
+<span class="o">...</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classification report:</span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+
+<span class="n">plot_confusion_matrix</span><span class="p">(</span> <span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
+                      <span class="n">confmat_classes</span><span class="p">,</span>
+                      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Confusion matrix&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;BuPu&#39;</span><span class="p">,</span> <span class="c1"># for more options see: https://matplotlib.org/stable/tutorials/colors/colormaps.html</span>
+                      <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># True returns percent, False raw numbers</span>
+                      <span class="p">)</span> <span class="c1"># YlOrBr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reminder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class2keep_RF</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">bands_selected_RF</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;U&#39;</span><span class="p">,</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="s1">&#39;[3.6]&#39;</span><span class="p">]</span>  
+<span class="n">ml_data_mags</span><span class="p">,</span> <span class="n">ml_data_clrs</span><span class="p">,</span> <span class="n">ml_objects</span><span class="p">,</span> <span class="n">ml_labels</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span> <span class="n">bands_selected_RF</span><span class="p">,</span> <span class="n">class2keep_RF</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># splitting data on magnitudes or colors</span>
+
+<span class="c1">#X_train, X_test, y_train, y_test = train_test_split(ml_data_mags, </span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">ml_data_clrs</span><span class="p">,</span> 
+                                                    <span class="n">ml_labels</span><span class="p">,</span>
+                                <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">ml_labels</span><span class="p">,</span> 
+                                <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1">#,  random_state=42) </span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&gt; From </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ml_objects</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources we use </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> for training and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> for testing.&#39;</span><span class="p">)</span> 
+
+<span class="c1"># check if in binary or multi-label mode</span>
+<span class="k">if</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">ml_labels</span><span class="p">:</span> <span class="c1"># binary</span>
+    <span class="n">confmat_classes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">confmat_classes</span> <span class="o">=</span> <span class="n">unique_cls</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Statistics per class:&#39;</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unique_cls</span><span class="p">:</span>
+        <span class="n">items_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">y_train</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">items_test</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">y_test</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">items_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">ml_labels</span><span class="o">==</span><span class="n">c</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&gt; For </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1"> there are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_total</span><span class="p">)</span><span class="si">}</span><span class="s1"> sources split in </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> (train) and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> (test) samples&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="n">clfrf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="c1"># code to fit and predict here (follow SVM structure)</span>
+<span class="n">clfrf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">clfrf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classification report:</span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">yhat</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Confusion matrix: </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">yhat</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plot_confusion_matrix</span><span class="p">(</span> <span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">yhat</span><span class="p">),</span>
+                      <span class="n">confmat_classes</span><span class="p">,</span>
+                      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Confusion matrix&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;BuPu&#39;</span><span class="p">,</span> <span class="c1"># for more options see: https://matplotlib.org/stable/tutorials/colors/colormaps.html</span>
+                      <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># True returns percent, False raw numbers</span>
+                      <span class="p">)</span> <span class="c1"># YlOrBr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div><div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Questions</strong></font></p>
+<ol class="arabic simple">
+<li><p>Why the results change by re-running it ?</p></li>
+<li><p>What is the difference on the accuracy of the algorithm if we use the colors instead of the magnitudes? Why do it?</p></li>
+</ol>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<ol class="arabic simple">
+<li><p>RF as the name suggest create always a different set of trees with random eselection of features and data. Consequently, the RF from one run to the other is not the same and there are small variations. However, the results are robust because they are averaging the results from all trees.</p></li>
+<li><p>Depending on the classes and bands selected the accuracy will (slightly) change. RF are rather insensitive to the input data (scaled or not).<br> However, colors are distance-independent features, which means that a model build with these features could be applicable to other galaxies also. Colors are distance-independent features, which means that the model could be applicable to other galaxies also. On the contrary, if we use only magnitudes this would mess up the prediction as with distance the sources become fainter.</p></li>
+</ol>
+</details>
+</div></section>
+<section class="tex2jax_ignore mathjax_ignore" id="classification-algorithms-overview">
+<h1>Classification algorithms overview<a class="headerlink" href="#classification-algorithms-overview" title="Link to this heading">#</a></h1>
+<p>This is a presentation of the set of <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html"><strong>sklearn</strong></a> algorithms with toy datasets, and then describe some of them.</p>
+<p>This serves as a showcase of the available methods and how they compare. You can easily adapt any of these methods to the following examples or your own problems.</p>
+<div style="text-align: center;">
+<img src="images/sklearn_classification.png" width=1200> 
+Overview of the clustering algorithms in sklearn
+</img>
+    </div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Question</strong></font></p>
+<p>Explore the results above - what differences do you notice?</p>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p>An indicative list of noticable differences:</p>
+<ul>
+    <li> There is not a single best algorithm. 
+    <li> Some algorithms are more able to separate classes.
+    <li> Some algorithms have limited ability (e.g. the linear SVM with non-linear distributed data). 
+</ul>
+</details>
+</div></section>
+<section class="tex2jax_ignore mathjax_ignore" id="recap-steps-to-follow-when-building-a-classification-model">
+<h1>Recap: steps to follow when building a classification model<a class="headerlink" href="#recap-steps-to-follow-when-building-a-classification-model" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>1. Examine / visualize / preprocessing data</strong></p>
+<p><strong>2. Select features</strong></p>
+<p><strong>3. Select algorithm</strong></p>
+<p><strong>4. Split data and follow Golden rule</strong></p>
+<p><strong>5. Select metrics</strong></p>
+<p><strong>6. Examine results and re-iterate</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Machine_Learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Intro_and_Clustering.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Machine Learning and Clustering</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ML_Practices.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Machine Learning Practices and Protocols</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Machine Learning: Classification</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-classification">Types of Classification</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flavors">Flavors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sample-for-our-classification-example">The sample for our classification example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-examine-data">Load and examine data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-data-select-features">Visualize data - select features</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-support-vector-machine-svm-algorithm">The Support Vector Machine (SVM) algorithm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boundary-in-2d">The boundary (in 2D)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-loss-function-again">Minimizing the loss function - again !</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-remarks-on-svm">Final remarks on SVM</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#svm-in-practice">SVM in practice</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binary-problem">The binary problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-data-splitting-and-the-golden-rule">Introducing data splitting and the Golden rule</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation-metrics-a-mini-discussion">Model evaluation metrics - a mini discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multi-class-problem">The multi-class problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-into-train-and-test-sets-for-multi-class">Splitting into train and test sets for multi-class</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-random-forest-algorithm">The Random Forest algorithm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">Decision Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-what">Minimizing what?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-remarks-on-random-forest">Final remarks on Random Forest</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-in-practice">Random Forest in practice</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-algorithms-overview">Classification algorithms overview</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-steps-to-follow-when-building-a-classification-model">Recap: steps to follow when building a classification model</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
